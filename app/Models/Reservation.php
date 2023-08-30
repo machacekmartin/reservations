@@ -37,6 +37,6 @@ class Reservation extends Model
 
     public function tables(): BelongsToMany
     {
-        return $this->belongsToMany(Table::class, 'table_reservation');
+        return $this->belongsToMany(Table::class, 'table_reservation')->withTimestamps();
     }
 }
