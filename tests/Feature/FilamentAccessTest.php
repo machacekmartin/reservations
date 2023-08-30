@@ -23,7 +23,7 @@ it('does not allow access to filament admin panel to user with role other than a
     ['role' => 'manager'],
     ['role' => 'user'],
     ['role' => 'customer'],
-    ['role' => 'some-other-role']
+    ['role' => 'some-other-role'],
 ]);
 
 it('does not allow access to filament admin panel to user with no role', function () {
