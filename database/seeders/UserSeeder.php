@@ -11,7 +11,10 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->as('admin')
-            ->create();
+            ->create([
+                'name' => 'Administrator',
+                'email' => 'admin@reservations.test',
+            ]);
 
         User::factory()
             ->as('user')
