@@ -8,4 +8,5 @@ parameters:
     level: 9
     ignoreErrors:
     excludePaths:
+        - database/migrations
     checkGenericClassInNonGenericObjectType: false
