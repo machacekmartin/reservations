@@ -35,7 +35,8 @@ class ReservationResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\Toggle::make('fulfilled')
-                    ->required(),
+                    ->required()
+                    ->inline(false),
                 Forms\Components\TextInput::make('note')
                     ->maxLength(255),
             ]);

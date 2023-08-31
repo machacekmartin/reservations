@@ -25,8 +25,8 @@ class TableResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Toggle::make('available')
-                    ->inline(false)
-                    ->required(),
+                    ->required()
+                    ->inline(false),
                 Forms\Components\TextInput::make('capacity')
                     ->required()
                     ->numeric(),
