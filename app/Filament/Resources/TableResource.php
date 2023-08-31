@@ -94,4 +94,21 @@ class TableResource extends Resource
     {
         return __('Restaurant management');
     }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['label'];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string
+    {
+        return $record->label;
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            __('Capacity') => $record->capacity,
+        ];
+    }
 }

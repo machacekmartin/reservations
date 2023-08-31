@@ -115,4 +115,32 @@ class ReservationResource extends Resource
     {
         return __('Restaurant management');
     }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['user.name', 'user.email'];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string
+    {
+        return __('Starts at'). ' ' . $record->start_at->format('Y-m-d H:i');
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            __('User') => $record->user->name,
+            __('Note') => $record->note,
+        ];
+    }
+
+    /**
+     * Limit the global search only to reservations starting between yesterday and tomorrow
+     */
+    public static function getGlobalSearchEloquentQuery(): Builder
+    {
+        return static::getEloquentQuery()
+            ->where('start_at', '>=', now()->yesterday()->startOfDay())
+            ->where('start_at', '<=', now()->tomorrow()->endOfDay());
+    }
 }
