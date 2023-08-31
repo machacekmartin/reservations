@@ -58,7 +58,7 @@ class TableResource extends Resource
                     ->sortable(),
                 Tables\Columns\IconColumn::make('current_occupancy')
                     ->label(__('Currently available'))
-                    ->getStateUsing(fn (TableModel $record) => !$record->isOccupied())
+                    ->getStateUsing(fn (TableModel $record) => ! $record->isOccupied())
                     ->boolean(),
             ])
             ->filters([
