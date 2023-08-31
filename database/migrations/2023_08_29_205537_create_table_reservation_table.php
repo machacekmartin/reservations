@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('table_id')->constrained();
-            $table->foreignId('reservation_id')->constrained();
+            $table->foreignId('table_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('reservation_id')->constrained()->cascadeOnDelete();
         });
     }
 };
