@@ -56,6 +56,10 @@ class TableResource extends Resource
                 Tables\Columns\TextColumn::make('capacity')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\IconColumn::make('current_occupancy')
+                    ->label(__('Currently available'))
+                    ->getStateUsing(fn (TableModel $record) => !$record->isOccupied())
+                    ->boolean(),
             ])
             ->filters([
                 //
