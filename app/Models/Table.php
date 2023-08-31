@@ -27,12 +27,12 @@ class Table extends Model
         return $this->belongsToMany(Reservation::class, 'table_reservation')->withTimestamps();
     }
 
-    public function isOccupied(Carbon $when = null): bool
+    public function isOccupied(Carbon $at = null): bool
     {
         return $this->reservations()
             ->whereNull('canceled_at')
-            ->where('start_at', '<=', $when ?? now())
-            ->where('end_at', '>=', $when ?? now())
+            ->where('start_at', '<=', $at ?? now())
+            ->where('end_at', '>=', $at ?? now())
             ->exists();
     }
 }
