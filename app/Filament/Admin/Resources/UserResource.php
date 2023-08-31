@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\FIlament\Admin\Resources;
 
-use App\Filament\Resources\TableResource\Pages;
-use App\Models\Table as TableModel;
+use App\FIlament\Admin\Resources\UserResource\Pages;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -11,36 +11,39 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
-class TableResource extends Resource
+class UserResource extends Resource
 {
-    protected static ?string $model = TableModel::class;
+    protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('label')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Toggle::make('available')
+                Forms\Components\TextInput::make('email')
+                    ->email()
                     ->required()
-                    ->inline(false),
-                Forms\Components\TextInput::make('capacity')
-                    ->required()
-                    ->numeric(),
-                // Forms\Components\TextInput::make('location')
-                //     ->required(),
+                    ->maxLength(255),
+                Forms\Components\DateTimePicker::make('email_verified_at')
+                    ->disabled(),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultGroup('restaurant.name')
-            ->paginationPageOptions([25, 50, 100])
             ->columns([
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email_verified_at')
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -49,17 +52,6 @@ class TableResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('label')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('available')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('capacity')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('current_occupancy')
-                    ->label(__('Currently available'))
-                    ->getStateUsing(fn (TableModel $record) => ! $record->isOccupied())
-                    ->boolean(),
             ])
             ->filters([
                 //
@@ -87,38 +79,37 @@ class TableResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTables::route('/'),
-            'create' => Pages\CreateTable::route('/create'),
-            'edit' => Pages\EditTable::route('/{record}/edit'),
+            'index' => Pages\ListUsers::route('/'),
+            'create' => Pages\CreateUser::route('/create'),
+            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 
     public static function getNavigationGroup(): ?string
     {
-        return __('Restaurant management');
+        return __('User management');
     }
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['label'];
+        return ['name', 'email'];
     }
 
     /**
-     * @param  TableModel  $record
+     * @param  User  $record
      */
     public static function getGlobalSearchResultTitle(Model $record): string
     {
-        return $record->label;
+        return $record->name;
     }
 
     /**
-     * @param  TableModel  $record
+     * @param  User  $record
      */
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
-            (string) __('Capacity') => (string) $record->capacity,
-            (string) __('Occuiped') => $record->isOccupied() ? __('Yes') : __('No'),
+            (string) __('Email') => $record->email,
         ];
     }
 }

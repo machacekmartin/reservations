@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\TableResource\Pages;
+namespace App\Filament\Admin\Resources\TableResource\Pages;
 
-use App\Filament\Resources\TableResource;
+use App\Filament\Admin\Resources\TableResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 

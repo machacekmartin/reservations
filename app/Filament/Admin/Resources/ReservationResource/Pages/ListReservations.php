@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\ReservationResource\Pages;
+namespace App\Filament\Admin\Resources\ReservationResource\Pages;
 
-use App\Filament\Resources\ReservationResource;
+use App\Filament\Admin\Resources\ReservationResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

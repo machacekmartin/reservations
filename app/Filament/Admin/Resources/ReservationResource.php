@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Admin\Resources;
 
-use App\Filament\Resources\ReservationResource\Pages;
+use App\Filament\Admin\Resources\ReservationResource\Pages;
+use App\Filament\Admin\Traits\ScopeToUser;
 use App\Models\Reservation;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,9 +12,12 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Response;
 
 class ReservationResource extends Resource
 {
+    use ScopeToUser;
+
     protected static ?string $model = Reservation::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
