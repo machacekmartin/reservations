@@ -23,7 +23,7 @@ class ReservationSeeder extends Seeder
                 $reservation->tables()->attach($tables);
 
                 // Assigns restaurant to reservation based on first table's restaurant
-                $reservation->restaurant()->associate($tables->first()->restaurant);
+                $reservation->restaurant()->associate($tables->firstOrFail()->restaurant);
             });
     }
 }
