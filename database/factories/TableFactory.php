@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,6 +17,7 @@ class TableFactory extends Factory
             'available' => $this->faker->boolean(80),
             'capacity' => $this->faker->numberBetween(1, 10),
             'location' => [],
+            'restaurant_id' => Restaurant::factory(),
         ];
     }
 }

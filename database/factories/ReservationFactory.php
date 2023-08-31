@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
@@ -24,6 +25,7 @@ class ReservationFactory extends Factory
             'fulfilled' => $this->faker->boolean(30),
             'note' => $this->faker->sentence(),
             'user_id' => User::factory(),
+            'restaurant_id' => Restaurant::factory(),
         ];
     }
 }
