@@ -3,17 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReservationResource\Pages;
-use App\Filament\Resources\ReservationResource\RelationManagers;
 use App\Models\Reservation;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ReservationResource extends Resource
 {
@@ -121,13 +118,13 @@ class ReservationResource extends Resource
         return ['user.name', 'user.email'];
     }
 
-    /** @param Reservation $record */
+    /** @param  Reservation  $record */
     public static function getGlobalSearchResultTitle(Model $record): string
     {
-        return __('Starts at'). ' ' . $record->start_at->format('Y-m-d H:i');
+        return __('Starts at') . ' ' . $record->start_at->format('Y-m-d H:i');
     }
 
-    /** @param Reservation $record */
+    /** @param  Reservation  $record */
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
