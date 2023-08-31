@@ -95,15 +95,17 @@ class UserResource extends Resource
         return ['name', 'email'];
     }
 
+    /** @param User $record */
     public static function getGlobalSearchResultTitle(Model $record): string
     {
         return $record->name;
     }
 
+    /** @param User $record */
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
-            __('Email') => $record->email,
+            (string) __('Email') => $record->email,
         ];
     }
 }

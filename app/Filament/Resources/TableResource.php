@@ -100,15 +100,17 @@ class TableResource extends Resource
         return ['label'];
     }
 
+    /** @param TableModel $record */
     public static function getGlobalSearchResultTitle(Model $record): string
     {
         return $record->label;
     }
 
+    /** @param TableModel $record */
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
-            __('Capacity') => $record->capacity,
+            (string) __('Capacity') => (string) $record->capacity,
         ];
     }
 }

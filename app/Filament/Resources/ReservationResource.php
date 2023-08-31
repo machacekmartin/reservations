@@ -121,16 +121,18 @@ class ReservationResource extends Resource
         return ['user.name', 'user.email'];
     }
 
+    /** @param Reservation $record */
     public static function getGlobalSearchResultTitle(Model $record): string
     {
         return __('Starts at'). ' ' . $record->start_at->format('Y-m-d H:i');
     }
 
+    /** @param Reservation $record */
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
-            __('User') => $record->user->name,
-            __('Note') => $record->note,
+            (string) __('User') => $record->user->name,
+            (string) __('Note') => $record->note ?? '-',
         ];
     }
 
