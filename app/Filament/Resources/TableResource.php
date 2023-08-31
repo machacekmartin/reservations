@@ -112,6 +112,7 @@ class TableResource extends Resource
     {
         return [
             (string) __('Capacity') => (string) $record->capacity,
+            (string) __('Occuiped') => $record->isOccupied() ? __('Yes') : __('No')
         ];
     }
 }
