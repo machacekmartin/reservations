@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Reservation;
+use App\Models\Restaurant;
 use App\Models\Table;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -11,14 +12,18 @@ class ReservationSeeder extends Seeder
 {
     public function run(): void
     {
-        $reservations = Reservation::factory()
+        Reservation::factory()
             ->count(40)
             ->recycle(User::all())
-            ->create();
+            ->recycle(Restaurant::all())
+            ->create()
+            ->each(function (Reservation $reservation) {
+                // Each reservation has 1-5 tables
+                $tables = Table::inRandomOrder()->limit(fake()->numberBetween(1, 5))->get();
+                $reservation->tables()->attach($tables);
 
-        // Fills table_reservation junction table. Doesnt account for overlaping reservations
-        $reservations->each(function (Reservation $reservation) {
-            $reservation->tables()->attach(Table::inRandomOrder()->limit(5)->get());
-        });
+                // Assigns restaurant to reservation based on first table's restaurant
+                $reservation->restaurant()->associate($tables->first()->restaurant);
+            });
     }
 }
