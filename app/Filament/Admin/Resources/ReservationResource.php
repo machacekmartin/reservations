@@ -3,7 +3,6 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\ReservationResource\Pages;
-use App\Filament\Admin\Traits\ScopeToUser;
 use App\Models\Reservation;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -15,8 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReservationResource extends Resource
 {
-    use ScopeToUser;
-
     protected static ?string $model = Reservation::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';

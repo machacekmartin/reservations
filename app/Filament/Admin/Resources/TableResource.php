@@ -1,8 +1,8 @@
 <?php
 
-namespace App\FIlament\Admin\Resources;
+namespace App\Filament\Admin\Resources;
 
-use App\FIlament\Admin\Resources\TableResource\Pages;
+use App\Filament\Admin\Resources\TableResource\Pages;
 use App\Models\Table as TableModel;
 use Filament\Forms;
 use Filament\Forms\Form;
