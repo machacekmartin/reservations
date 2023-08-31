@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('note')->nullable();
 
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('restaurant_id')->constrained();
         });
     }
 };

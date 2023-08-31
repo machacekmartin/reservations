@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('capacity');
             $table->json('location');
 
+            $table->foreignId('restaurant_id')->constrained();
         });
     }
 };
