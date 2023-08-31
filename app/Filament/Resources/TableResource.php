@@ -38,6 +38,8 @@ class TableResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultGroup('restaurant.name')
+            ->paginationPageOptions([25, 50, 100])
             ->columns([
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
