@@ -4,12 +4,15 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\UserResource\Pages;
 use App\Models\User;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class UserResource extends Resource
 {
@@ -21,37 +24,54 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('email_verified_at')
-                    ->disabled(),
-            ]);
+                Forms\Components\FileUpload::make('avatar')
+                    ->avatar(),
+
+                Forms\Components\Grid::make(1)->schema([
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+
+                    Forms\Components\TextInput::make('email')
+                        ->email()
+                        ->required()
+                        ->maxLength(255),
+
+                    PhoneInput::make('phone'),
+
+                    Forms\Components\DateTimePicker::make('email_verified_at')
+                        ->disabled(),
+                ])->columnSpan(3),
+            ])->columns(4);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('avatar')
+                    ->defaultImageUrl(fn (User $record) => Filament::getUserAvatarUrl($record))
+                    ->circular()
+                    ->extraCellAttributes(['class' => 'w-10']),
+
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                    ->weight(FontWeight::Bold)
+                    ->description(fn (User $record) => $record->roles->pluck('name')->join(', ')),
+
                 Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()
+                    ->url(fn (string $state) => "mailto:{$state}")
+                    ->icon('heroicon-o-envelope')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+
+                Tables\Columns\TextColumn::make('phone')
+                    ->url(fn (string $state) => "tel:{$state}")
+                    ->icon('heroicon-o-phone')
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('reservations')
+                    ->label('# of ' . __('Reservations'))
+                    ->getStateUsing(fn (User $record) => $record->reservations()->count())
+                    ->extraCellAttributes(['class' => 'w-full']),
             ])
             ->filters([
                 //
