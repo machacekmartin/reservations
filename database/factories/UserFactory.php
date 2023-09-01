@@ -24,6 +24,7 @@ class UserFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'avatar' => fake()->imageUrl(),
             'remember_token' => Str::random(10),
         ];
     }
@@ -46,5 +47,15 @@ class UserFactory extends Factory
         return $this->afterCreating(function (User $user) use ($role) {
             $user->assignRole($role);
         });
+    }
+
+    /**
+     * Do not add avatar to user.
+     */
+    public function withoutAvatar(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'avatar' => null
+        ]);
     }
 }
