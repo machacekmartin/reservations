@@ -24,7 +24,6 @@ class UserFactory extends Factory
             'phone' => fake()->e164PhoneNumber(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'avatar' => fake()->imageUrl(),
             'remember_token' => Str::random(10),
         ];
     }
@@ -50,12 +49,12 @@ class UserFactory extends Factory
     }
 
     /**
-     * Do not add avatar to user.
+     * Add avatar url to user.
      */
-    public function withoutAvatar(): static
+    public function withAvatar(string $url): static
     {
         return $this->state(fn (array $attributes) => [
-            'avatar' => null,
+            'avatar' => $url,
         ]);
     }
 }
