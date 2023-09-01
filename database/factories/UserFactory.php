@@ -55,7 +55,7 @@ class UserFactory extends Factory
     public function withoutAvatar(): static
     {
         return $this->state(fn (array $attributes) => [
-            'avatar' => null
+            'avatar' => null,
         ]);
     }
 }
