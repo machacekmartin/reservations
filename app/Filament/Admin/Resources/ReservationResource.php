@@ -3,7 +3,9 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\ReservationResource\Pages;
+use App\Filament\Admin\Resources\UserResource\Pages\EditUser;
 use App\Models\Reservation;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -49,16 +51,12 @@ class ReservationResource extends Resource
             ->paginationPageOptions([25, 50, 100])
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
+                    ->description(fn (Reservation $record) => $record->user->email)
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('tables.label')
+                    ->getStateUsing(fn (Reservation $record) => $record->tables->pluck('label')->join(', '))
+                    ->badge()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('start_at')
                     ->dateTime()
                     ->sortable(),
@@ -71,6 +69,7 @@ class ReservationResource extends Resource
                 Tables\Columns\TextColumn::make('canceled_at')
                     ->dateTime()
                     ->sortable(),
+
                 Tables\Columns\TextColumn::make('guest_count')
                     ->numeric()
                     ->sortable(),
