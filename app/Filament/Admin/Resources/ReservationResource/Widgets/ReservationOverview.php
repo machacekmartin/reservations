@@ -19,7 +19,7 @@ class ReservationOverview extends BaseWidget
             Stat::make('Owner of reservation', $this->record->user->name)
                 ->description($this->record->user->email . ' | ' . $this->record->user->phone),
 
-            Stat::make('Status', $this->record->status->getLabel())
+            Stat::make('Status', $this->record->status->getLabel() ?? 'Unknown')
                 ->icon($this->record->status->getIcon())
                 ->color($this->record->status->getColor()),
         ];
