@@ -3,10 +3,8 @@
 namespace App\Filament\Admin\Resources\ReservationResource\Widgets;
 
 use App\Models\Reservation;
-use Filament\Support\Colors\Color;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Illuminate\Support\Facades\Blade;
 
 class ReservationOverview extends BaseWidget
 {

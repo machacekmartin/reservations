@@ -26,7 +26,7 @@ enum ReservationStatus: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::PENDING => Color::Blue,
@@ -37,7 +37,7 @@ enum ReservationStatus: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getIcon(): string | null
+    public function getIcon(): ?string
     {
         return match ($this) {
             self::PENDING => 'heroicon-o-clock',
