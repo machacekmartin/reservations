@@ -20,9 +20,7 @@ class ReservationFactory extends Factory
             'start_at' => $startAt,
             'end_at' => Carbon::instance($startAt)->addSeconds($this->faker->numberBetween(1800, 10800)),
             'remind_at' => Carbon::instance($startAt)->subSeconds($this->faker->numberBetween(900, 7200)),
-
             'guest_count' => $this->faker->numberBetween(1, 10),
-
             'note' => $this->faker->sentence(),
             'user_id' => User::factory(),
             'restaurant_id' => Restaurant::factory(),
@@ -47,6 +45,13 @@ class ReservationFactory extends Factory
     {
         return $this->state([
             'fulfilled' => false,
+        ]);
+    }
+
+    public function withoutReminder(): self
+    {
+        return $this->state([
+            'remind_at' => null,
         ]);
     }
 }
