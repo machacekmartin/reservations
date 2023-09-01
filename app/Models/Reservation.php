@@ -31,7 +31,6 @@ class Reservation extends Model
         'end_at' => 'datetime',
         'remind_at' => 'datetime',
         'canceled_at' => 'datetime',
-        'fulfilled' => 'boolean',
     ];
 
     public function user(): BelongsTo
