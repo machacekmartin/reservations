@@ -16,7 +16,7 @@ class ReservationsRelationManager extends RelationManager
         $table = ReservationResource::table($table);
 
         $table->getAction('edit')
-            ->action(fn (Reservation $record) => redirect()->to(ReservationResource::getUrl('edit', ['record' => $record])));
+            ?->action(fn (Reservation $record) => redirect()->to(ReservationResource::getUrl('edit', ['record' => $record])));
 
         return $table;
     }
