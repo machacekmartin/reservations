@@ -18,7 +18,7 @@ class EditReservation extends EditRecord
     {
         return [
             Actions\Action::make('fulfill')
-                ->disabled(fn () => ! in_array($this->record->status, [ReservationStatus::PENDING, ReservationStatus::LATE]))
+                ->disabled(fn (Reservation $record) => ! in_array($record->status, [ReservationStatus::PENDING, ReservationStatus::LATE]))
                 ->icon(ReservationStatus::FULFILLED->getIcon())
                 ->color(ReservationStatus::FULFILLED->getColor())
                 ->modalWidth('max-w-xl')
@@ -32,10 +32,10 @@ class EditReservation extends EditRecord
                         ->seconds(false)
                         ->default(now()),
                 ])
-                ->action(function (array $data): void {
-                    $this->record->arrived_at = $data['arrived_at'];
-                    $this->record->status = ReservationStatus::FULFILLED;
-                    $this->record->save();
+                ->action(function (array $data, Reservation $record): void {
+                    $record->arrived_at = $data['arrived_at'];
+                    $record->status = ReservationStatus::FULFILLED;
+                    $record->save();
                     Notification::make()->success()->title('Reservation fulfilled')->send();
                 }),
 
