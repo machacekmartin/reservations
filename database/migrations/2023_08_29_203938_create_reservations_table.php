@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('canceled_at')->nullable();
 
             $table->unsignedInteger('guest_count');
-            $table->boolean('fulfilled')->default(false);
+            $table->boolean('fulfilled')->nullable();
             $table->string('note')->nullable();
 
             $table->foreignId('user_id')->constrained();
