@@ -24,8 +24,8 @@ class ReservationsStats extends BaseWidget
                 ->icon('heroicon-o-check-circle')
                 ->color(Color::Green),
 
-            Stat::make('Todays cancelled reservations', $this->cancelledReservations()->where('start_at', '>=', now()->startOfDay())->where('end_at', '<=', now()->endOfDay())->count())
-                ->description('Overall cancelled: ' . $this->cancelledReservations()->count())
+            Stat::make('Todays canceled reservations', $this->canceledReservations()->where('start_at', '>=', now()->startOfDay())->where('end_at', '<=', now()->endOfDay())->count())
+                ->description('Overall canceled: ' . $this->canceledReservations()->count())
                 ->icon('heroicon-o-x-circle')
                 ->color(Color::Rose),
         ];
@@ -44,7 +44,7 @@ class ReservationsStats extends BaseWidget
             ->where('fulfilled', true);
     }
 
-    private function cancelledReservations(): Builder
+    private function canceledReservations(): Builder
     {
         return Reservation::query()
             ->whereNotNull('canceled_at');
