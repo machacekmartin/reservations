@@ -8,7 +8,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class ReservationOverview extends BaseWidget
 {
-    public ?Reservation $record = null;
+    public Reservation $record;
 
     protected function getStats(): array
     {
