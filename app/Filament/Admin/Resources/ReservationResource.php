@@ -69,10 +69,14 @@ class ReservationResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->description(fn (Reservation $record) => $record->user->email)
                     ->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge(),
                 Tables\Columns\TextColumn::make('tables.label')
                     ->getStateUsing(fn (Reservation $record) => $record->tables->pluck('label')->join(', '))
-                    ->badge()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('guest_count')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('start_at')
                     ->dateTime()
                     ->sortable(),
@@ -82,14 +86,13 @@ class ReservationResource extends Resource
                 Tables\Columns\TextColumn::make('remind_at')
                     ->dateTime()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('arrived_at')
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('canceled_at')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('guest_count')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('fulfilled')
-                    ->boolean(),
+
                 Tables\Columns\TextColumn::make('note')
                     ->searchable(),
             ])
