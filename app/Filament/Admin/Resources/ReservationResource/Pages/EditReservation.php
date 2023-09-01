@@ -41,7 +41,7 @@ class EditReservation extends EditRecord
 
             Actions\Action::make('cancel')
                 ->action(null)
-                ->disabled(fn () => ! in_array($this->record->status, [ReservationStatus::PENDING, ReservationStatus::LATE]))
+                ->disabled(fn (Reservation $record) => ! in_array($record->status, [ReservationStatus::PENDING, ReservationStatus::LATE]))
                 ->icon(ReservationStatus::CANCELED->getIcon())
                 ->color(ReservationStatus::CANCELED->getColor())
                 ->modalWidth('max-w-xl')
