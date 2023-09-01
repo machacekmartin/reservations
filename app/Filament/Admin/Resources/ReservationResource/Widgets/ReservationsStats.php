@@ -15,17 +15,17 @@ class ReservationsStats extends BaseWidget
         return [
             // where start is only today
             Stat::make('Todays pending reservations', $this->pendingReservations()->where('start_at', '>=', now()->startOfDay())->where('end_at', '<=', now()->endOfDay())->count())
-                ->description('Overall pending: '. $this->pendingReservations()->count())
+                ->description('Overall pending: ' . $this->pendingReservations()->count())
                 ->icon('heroicon-o-clock')
                 ->color(Color::Gray),
 
             Stat::make('Todays fulfilled reservations', $this->fulfilledReservations()->where('start_at', '>=', now()->startOfDay())->where('end_at', '<=', now()->endOfDay())->count())
-                ->description('Overall fulfilled: '. $this->fulfilledReservations()->count())
+                ->description('Overall fulfilled: ' . $this->fulfilledReservations()->count())
                 ->icon('heroicon-o-check-circle')
                 ->color(Color::Green),
 
             Stat::make('Todays cancelled reservations', $this->cancelledReservations()->where('start_at', '>=', now()->startOfDay())->where('end_at', '<=', now()->endOfDay())->count())
-                ->description('Overall cancelled: '. $this->cancelledReservations()->count())
+                ->description('Overall cancelled: ' . $this->cancelledReservations()->count())
                 ->icon('heroicon-o-x-circle')
                 ->color(Color::Rose),
         ];

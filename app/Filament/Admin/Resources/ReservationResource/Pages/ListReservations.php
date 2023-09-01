@@ -21,7 +21,7 @@ class ListReservations extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            ReservationsStats::class
+            ReservationsStats::class,
         ];
     }
 }
