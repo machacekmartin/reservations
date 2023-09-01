@@ -5,8 +5,6 @@ namespace App\Filament\Admin\Resources\UserResource\RelationManagers;
 use App\Filament\Admin\Resources\ReservationResource;
 use App\Models\Reservation;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
-use Filament\Tables\Columns\Column;
 use Filament\Tables\Table;
 
 class ReservationsRelationManager extends RelationManager
