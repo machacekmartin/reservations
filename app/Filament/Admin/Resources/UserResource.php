@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\UserResource\Pages;
+use App\Filament\Admin\Resources\UserResource\RelationManagers\ReservationsRelationManager;
 use App\Models\User;
 use Filament\Facades\Filament;
 use Filament\Forms;
@@ -39,10 +40,14 @@ class UserResource extends Resource
 
                     PhoneInput::make('phone'),
 
-                    Forms\Components\DateTimePicker::make('email_verified_at')
+                    Forms\Components\DateTimePicker::make('email_verified_at'),
+
+                    Forms\Components\Select::make('roles')
+                        ->multiple()
+                        ->relationship('roles', 'name')
                         ->disabled(),
-                ])->columnSpan(3),
-            ])->columns(4);
+                ])->columnSpan(4),
+            ])->columns(5);
     }
 
     public static function table(Table $table): Table
