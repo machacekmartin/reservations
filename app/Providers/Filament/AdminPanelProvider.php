@@ -44,7 +44,6 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentLanguageSwitchPlugin::make(),
             ])
-            ->topNavigation()
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
