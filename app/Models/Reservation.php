@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ReservationStatus;
 use App\Traits\BelongsToRestaurant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property User $user
+ * @property ReservationStatus $status
  */
 class Reservation extends Model
 {
@@ -34,6 +36,7 @@ class Reservation extends Model
         'remind_at' => 'datetime',
         'canceled_at' => 'datetime',
         'arrived_at' => 'datetime',
+        'status' => ReservationStatus::class,
     ];
 
     public function user(): BelongsTo
