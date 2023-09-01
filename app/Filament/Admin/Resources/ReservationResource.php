@@ -2,7 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Enums\ReservationStatus;
 use App\Filament\Admin\Resources\ReservationResource\Pages;
+use App\Filament\Admin\Resources\ReservationResource\Widgets\ReservationOverview;
 use App\Models\Reservation;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -22,24 +24,40 @@ class ReservationResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('start_at')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('end_at')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('remind_at'),
-                Forms\Components\DateTimePicker::make('canceled_at'),
-                Forms\Components\TextInput::make('guest_count')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\Toggle::make('fulfilled')
-                    ->required()
-                    ->inline(false),
-                Forms\Components\TextInput::make('note')
-                    ->maxLength(255),
-            ]);
+                Forms\Components\Fieldset::make('General information')
+                    ->schema([
+                        Forms\Components\Select::make('user_id')
+                            ->relationship('user', 'name')
+                            ->required(),
+                        Forms\Components\TextInput::make('guest_count')
+                            ->required()
+                            ->numeric(),
+                        Forms\Components\TextInput::make('note')
+                            ->maxLength(100),
+                        Forms\Components\Select::make('status')
+                            ->options(ReservationStatus::class)
+                            ->required(),
+                    ]),
+                Forms\Components\Fieldset::make('Time details')
+                    ->schema([
+                        Forms\Components\DateTimePicker::make('created_at')
+                            ->disabled(),
+                        Forms\Components\DateTimePicker::make('start_at')
+                            ->required()
+                            ->seconds(false)
+                            ->before('end_at'),
+                        Forms\Components\DateTimePicker::make('end_at')
+                            ->required()
+                            ->seconds(false)
+                            ->after('start_at'),
+                        Forms\Components\DateTimePicker::make('remind_at')
+                            ->seconds(false),
+                        Forms\Components\DateTimePicker::make('arrived_at')
+                            ->seconds(false),
+                        Forms\Components\DateTimePicker::make('canceled_at')
+                            ->seconds(false),
+                    ])->columns(3),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -67,7 +85,6 @@ class ReservationResource extends Resource
                 Tables\Columns\TextColumn::make('canceled_at')
                     ->dateTime()
                     ->sortable(),
-
                 Tables\Columns\TextColumn::make('guest_count')
                     ->numeric()
                     ->sortable(),
@@ -90,6 +107,13 @@ class ReservationResource extends Resource
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
             ]);
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            ReservationOverview::class,
+        ];
     }
 
     public static function getRelations(): array
