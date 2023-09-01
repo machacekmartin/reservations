@@ -20,6 +20,8 @@ class Reservation extends Model
         'end_at',
         'remind_at',
         'canceled_at',
+        'arrived_at',
+        'status',
         'guest_count',
         'fulfilled',
         'note',
@@ -31,6 +33,7 @@ class Reservation extends Model
         'end_at' => 'datetime',
         'remind_at' => 'datetime',
         'canceled_at' => 'datetime',
+        'arrived_at' => 'datetime',
     ];
 
     public function user(): BelongsTo

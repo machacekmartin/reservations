@@ -34,6 +34,13 @@ class ReservationFactory extends Factory
         ]);
     }
 
+    public function arrived(): self
+    {
+        return $this->state([
+            'arrived_at' => $this->faker->dateTimeBetween('-1 day', '+1 day'),
+        ]);
+    }
+
     public function fulfilled(): self
     {
         return $this->state([
