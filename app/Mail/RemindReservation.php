@@ -26,7 +26,7 @@ class RemindReservation extends Mailable
     {
         return new Envelope(
             from: new Address('notifications@reservations.test'),
-            subject: 'Remind Reservation at '. $this->reservation->start_at->format('H:i'),
+            subject: 'Remind Reservation at ' . $this->reservation->start_at->format('H:i'),
         );
     }
 

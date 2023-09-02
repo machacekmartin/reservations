@@ -43,7 +43,7 @@ class TableResource extends Resource
                 Tables\Columns\TextColumn::make('current_reservation.user.name')
                     ->label('Occupied by')
                     ->default('-')
-                    ->description(fn (TableModel $record, $state) => $state != '-' ? 'Until '. $record->currentReservation?->end_at->format('H:i') : null),
+                    ->description(fn (TableModel $record, $state) => $state != '-' ? 'Until ' . $record->currentReservation?->end_at->format('H:i') : null),
                 Tables\Columns\TextColumn::make('capacity')
                     ->numeric()
                     ->sortable(),
