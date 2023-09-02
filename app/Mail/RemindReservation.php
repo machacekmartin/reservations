@@ -14,7 +14,7 @@ class RemindReservation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(Reservation $reservation)
+    public function __construct(public Reservation $reservation)
     {
         //
     }
@@ -26,7 +26,7 @@ class RemindReservation extends Mailable
     {
         return new Envelope(
             from: new Address('notifications@reservations.test'),
-            subject: 'Remind Reservation',
+            subject: 'Remind Reservation at '. $this->reservation->start_at->format('H:i'),
         );
     }
 
