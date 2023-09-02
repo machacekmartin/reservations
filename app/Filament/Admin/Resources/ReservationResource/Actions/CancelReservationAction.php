@@ -5,12 +5,11 @@ namespace App\Filament\Admin\Resources\ReservationResource\Actions;
 use App\Enums\ReservationStatus;
 use App\Models\Reservation;
 use Filament\Actions\Action;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Notifications\Notification;
 
 class CancelReservationAction extends Action
 {
-    public static function make(?string $name = null): static
+    public static function make(string $name = null): static
     {
         return parent::make($name)
             ->label('Cancel')

@@ -9,7 +9,7 @@ use Filament\Notifications\Notification;
 
 class MissReservationAction extends Action
 {
-    public static function make(?string $name = null): static
+    public static function make(string $name = null): static
     {
         return parent::make($name)
             ->label('Did not arrive')
