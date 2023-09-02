@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Builders\ReservationBuilder;
 use App\Enums\ReservationStatus;
 use App\Traits\BelongsToRestaurant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,6 +39,11 @@ class Reservation extends Model
         'arrived_at' => 'datetime',
         'status' => ReservationStatus::class,
     ];
+
+    public function newEloquentBuilder($query)
+    {
+        return new ReservationBuilder($query);
+    }
 
     public function user(): BelongsTo
     {
