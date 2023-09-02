@@ -1,7 +1,5 @@
 <?php
 
-use App\Enums\ReservationStatus;
-use App\Jobs\MarkLateReservations;
 use App\Jobs\SendReservationReminders;
 use App\Mail\RemindReservation;
 use App\Models\Reservation;
@@ -56,6 +54,6 @@ it('send out multiple compliant reservation reminders', function () {
 
     Mail::assertSentCount(2);
 
-    expect( $reservations->fresh()->pluck('reminded')->toArray())
+    expect($reservations->fresh()->pluck('reminded')->toArray())
         ->toBe([true, false, false, true, true]);
 });
