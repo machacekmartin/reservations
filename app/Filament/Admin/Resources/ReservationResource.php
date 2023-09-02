@@ -116,7 +116,7 @@ class ReservationResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            ReservationOverview::class,
+            //
         ];
     }
 
