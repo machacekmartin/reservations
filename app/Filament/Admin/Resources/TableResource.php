@@ -30,8 +30,6 @@ class TableResource extends Resource
                 Forms\Components\TextInput::make('capacity')
                     ->required()
                     ->numeric(),
-                // Forms\Components\TextInput::make('location')
-                //     ->required(),
             ]);
     }
 
@@ -41,28 +39,20 @@ class TableResource extends Resource
             ->defaultGroup('restaurant.name')
             ->paginationPageOptions([25, 50, 100])
             ->columns([
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('label')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('available')
-                    ->boolean(),
+                Tables\Columns\TextColumn::make('current_reservation')
+                    ->label('Occupied by')
+                    ->formatStateUsing(fn ($state) => $state?->user->name)
+                    ->description(fn ($state) => $state?->user->email),
                 Tables\Columns\TextColumn::make('capacity')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('current_occupancy')
-                    ->label('Currently available')
-                    ->getStateUsing(fn (TableModel $record) => ! $record->isOccupied())
-                    ->boolean(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('restaurant')
+                    ->relationship('restaurant', 'name')
+                    ->placeholder('All restaurants'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
