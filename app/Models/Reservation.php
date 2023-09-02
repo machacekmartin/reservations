@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Builders\ReservationBuilder;
 use App\Enums\ReservationStatus;
+use Database\Factories\ReservationFactory;
 use App\Traits\BelongsToRestaurant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property User $user
  * @property ReservationStatus $status
  * @method static ReservationBuilder query()
+ * @method static ReservationFactory factory($count = null, $state = [])
  */
 class Reservation extends Model
 {
