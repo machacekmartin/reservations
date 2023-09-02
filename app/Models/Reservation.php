@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * @property User $user
  * @property ReservationStatus $status
+ * @method static ReservationBuilder query()
  */
 class Reservation extends Model
 {
@@ -40,9 +41,10 @@ class Reservation extends Model
         'status' => ReservationStatus::class,
     ];
 
-    public function newEloquentBuilder($query)
+    public function newModelQuery(): ReservationBuilder
     {
-        return new ReservationBuilder($query);
+        $builder = new ReservationBuilder($this->newBaseQueryBuilder());
+        return $builder->setModel($this);
     }
 
     public function user(): BelongsTo
