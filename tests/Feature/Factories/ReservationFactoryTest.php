@@ -9,7 +9,7 @@ use Illuminate\Support\Carbon;
 it('generates plain reservation', function () {
     $reservation = Reservation::factory()->create();
 
-    expect($reservation->toArray())->toHaveCount(13);
+    expect($reservation->toArray())->toHaveCount(14);
 
     expect($reservation)
         ->start_at->toBeInstanceOf(Carbon::class)
@@ -17,6 +17,7 @@ it('generates plain reservation', function () {
         ->remind_at->toBeInstanceOf(Carbon::class)
         ->guest_count->toBeInt()
         ->note->toBeString()
+        ->reminded->toBeFalse()
         ->status->toBe(ReservationStatus::PENDING)
         ->canceled_at->toBeNull()
         ->arrived_at->toBeNull()

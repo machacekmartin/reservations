@@ -25,6 +25,7 @@ class ReservationFactory extends Factory
             'canceled_at' => null,
             'guest_count' => $this->faker->numberBetween(1, 10),
             'note' => $this->faker->sentence(),
+            'reminded' => false,
             'status' => ReservationStatus::PENDING,
             'user_id' => User::factory(),
             'restaurant_id' => Restaurant::factory(),

@@ -32,6 +32,7 @@ class Reservation extends Model
         'guest_count',
         'fulfilled',
         'note',
+        'reminded',
         'user_id',
     ];
 
@@ -41,6 +42,7 @@ class Reservation extends Model
         'remind_at' => 'datetime',
         'canceled_at' => 'datetime',
         'arrived_at' => 'datetime',
+        'reminded' => 'boolean',
         'status' => ReservationStatus::class,
     ];
 
