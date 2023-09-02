@@ -7,27 +7,27 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ReservationBuilder extends Builder
 {
-    public function pending()
+    public function pending(): self
     {
         return $this->where('status', ReservationStatus::PENDING);
     }
 
-    public function late()
+    public function late(): self
     {
         return $this->where('status', ReservationStatus::LATE);
     }
 
-    public function canceled()
+    public function canceled(): self
     {
         return $this->where('status', ReservationStatus::CANCELED);
     }
 
-    public function fulfilled()
+    public function fulfilled(): self
     {
         return $this->where('status', ReservationStatus::FULFILLED);
     }
 
-    public function missed()
+    public function missed(): self
     {
         return $this->where('status', ReservationStatus::MISSED);
     }
