@@ -41,10 +41,10 @@ class TableResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('label')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('current_reservation')
+                Tables\Columns\TextColumn::make('current_reservation.user.name')
                     ->label('Occupied by')
-                    ->formatStateUsing(fn ($state) => $state?->user->name)
-                    ->description(fn ($state) => $state?->user->email),
+                    ->default('-')
+                    ->description(fn (TableModel $record, $state) => $state != '-' ? 'Until '. $record->currentReservation?->end_at->format('H:i') : null),
                 Tables\Columns\TextColumn::make('capacity')
                     ->numeric()
                     ->sortable(),
@@ -108,7 +108,7 @@ class TableResource extends Resource
     {
         return [
             'Capacity' => (string) $record->capacity,
-            'Occuiped' => $record->isOccupied() ? 'Yes' : 'No',
+            'Occuiped' => $record->currentReservation ? 'Yes' : 'No',
         ];
     }
 }

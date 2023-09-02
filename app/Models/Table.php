@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @property-read Reservation|null $currentReservation
+ */
 class Table extends Model
 {
     use BelongsToRestaurant, HasFactory;
@@ -32,10 +35,10 @@ class Table extends Model
     {
         return Attribute::make(
             get: fn () => $this->reservations()
-                ->whereNull('canceled_at')
-                ->where('start_at', '<=', $at ?? now())
-                ->where('end_at', '>=', $at ?? now())
-                ->first(),
+                ->where('canceled_at', null)
+                ->where('start_at', '<=', now())
+                ->where('end_at', '>=', now())
+                ->first()
         );
     }
 }
