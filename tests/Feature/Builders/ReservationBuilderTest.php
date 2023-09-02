@@ -36,3 +36,22 @@ it('successfully scopes query by reservation statuses', function () {
         ->toHaveCount(6)
         ->each(fn ($item) => $item->status->toBe(ReservationStatus::MISSED));
 });
+
+it('scopes query to reservations made for today only', function () {
+    // Create 3 reservations for today
+    $today = Reservation::factory(3)->create([
+        'start_at' => now()->startOfDay(),
+        'end_at' => now()->startOfDay()->addHour()
+    ]);
+
+    // Create 5 reservations for tomorrow
+    Reservation::factory(5)->create([
+        'start_at' => now()->addDay()->startOfDay(),
+        'end_at' => now()->addDay()->startOfDay()->addHour()
+    ]);
+
+    $result = Reservation::query()->today()->get();
+
+    expect($result)->toHaveCount(3);
+    expect($result->pluck('id'))->toEqual($today->pluck('id'));
+})

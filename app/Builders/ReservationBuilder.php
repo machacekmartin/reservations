@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ReservationBuilder extends Builder
 {
+    public function today(): self
+    {
+        return $this
+            ->where('start_at', '>=', now()->startOfDay())
+            ->where('end_at', '<=', now()->endOfDay());
+    }
+
     public function pending(): self
     {
         return $this->where('status', ReservationStatus::PENDING);
