@@ -43,7 +43,7 @@ class ReservationFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'status' => ReservationStatus::CANCELED,
-            'canceled_at' => Carbon::instance($attributes['start_at'])->subMinutes(10),
+            'canceled_at' => Carbon::instance($attributes['start_at'])->subMinutes(10), /** @phpstan-ignore-line */
         ]);
     }
 
@@ -51,7 +51,7 @@ class ReservationFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'status' => ReservationStatus::FULFILLED,
-            'arrived_at' => Carbon::instance($attributes['start_at'])->subMinutes(10),
+            'arrived_at' => Carbon::instance($attributes['start_at'])->subMinutes(10), /** @phpstan-ignore-line */
         ]);
     }
 
