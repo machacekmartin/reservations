@@ -15,25 +15,25 @@ class ReservationsStats extends BaseWidget
         return [
             // where start is only today
             Stat::make('Todays pending / late',
-                $this->pending()->where('start_at', '>=', now()->startOfDay())->where('end_at', '<=', now()->endOfDay())->count() . ' / ' .
-                $this->late()->where('start_at', '>=', now()->startOfDay())->where('end_at', '<=', now()->endOfDay())->count()
+                Reservation::query()->pending()->today()->count() . ' / ' .
+                Reservation::query()->late()->today()->count()
             )
-                ->description('Overall ' . $this->pending()->count() . ' pending and ' . $this->late()->count() . ' late')
+                ->description('Overall ' . Reservation::query()->pending()->count() . ' pending and ' . Reservation::query()->late()->count() . ' late')
                 ->icon(ReservationStatus::PENDING->getIcon())
                 ->color(ReservationStatus::PENDING->getColor()),
 
-            Stat::make('Todays fulfilled ', $this->fulfilled()->where('start_at', '>=', now()->startOfDay())->where('end_at', '<=', now()->endOfDay())->count())
-                ->description('Overall fulfilled: ' . $this->fulfilled()->count())
+            Stat::make('Todays fulfilled ', Reservation::query()->fulfilled()->today()->count())
+                ->description('Overall fulfilled: ' . Reservation::query()->fulfilled()->count())
                 ->icon(ReservationStatus::FULFILLED->getIcon())
                 ->color(ReservationStatus::FULFILLED->getColor()),
 
-            Stat::make('Todays canceled ', $this->canceled()->where('start_at', '>=', now()->startOfDay())->where('end_at', '<=', now()->endOfDay())->count())
-                ->description('Overall canceled: ' . $this->canceled()->count())
+            Stat::make('Todays canceled ', Reservation::query()->canceled()->today()->count())
+                ->description('Overall canceled: ' . Reservation::query()->canceled()->count())
                 ->icon(ReservationStatus::CANCELED->getIcon())
                 ->color(ReservationStatus::CANCELED->getColor()),
 
-            Stat::make('Todays missed ', $this->missed()->where('start_at', '>=', now()->startOfDay())->where('end_at', '<=', now()->endOfDay())->count())
-                ->description('Overall missed: ' . $this->missed()->count())
+            Stat::make('Todays missed ', Reservation::query()->missed()->today()->count())
+                ->description('Overall missed: ' . Reservation::query()->missed()->count())
                 ->icon(ReservationStatus::LATE->getIcon())
                 ->color(ReservationStatus::LATE->getColor()),
         ];
@@ -42,30 +42,5 @@ class ReservationsStats extends BaseWidget
     protected function getColumns(): int
     {
         return 4;
-    }
-
-    private function pending(): Builder
-    {
-        return Reservation::query()->where('status', ReservationStatus::PENDING);
-    }
-
-    private function late(): Builder
-    {
-        return Reservation::query()->where('status', ReservationStatus::LATE);
-    }
-
-    private function fulfilled(): Builder
-    {
-        return Reservation::query()->where('status', ReservationStatus::FULFILLED);
-    }
-
-    private function canceled(): Builder
-    {
-        return Reservation::query()->where('status', ReservationStatus::CANCELED);
-    }
-
-    private function missed(): Builder
-    {
-        return Reservation::query()->where('status', ReservationStatus::MISSED);
     }
 }
