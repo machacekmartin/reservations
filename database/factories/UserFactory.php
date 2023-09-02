@@ -47,14 +47,4 @@ class UserFactory extends Factory
             $user->assignRole($role);
         });
     }
-
-    /**
-     * Add avatar url to user.
-     */
-    public function withAvatar(string $url): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'avatar' => $url,
-        ]);
-    }
 }
