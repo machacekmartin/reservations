@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Reservation extends Model
 {
-    use HasFactory, BelongsToRestaurant;
+    use BelongsToRestaurant, HasFactory;
 
     protected $fillable = [
         'start_at',

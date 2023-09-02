@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 
 class Table extends Model
 {
-    use HasFactory, BelongsToRestaurant;
+    use BelongsToRestaurant, HasFactory;
 
     protected $fillable = [
         'label',
