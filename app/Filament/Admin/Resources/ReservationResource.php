@@ -92,12 +92,13 @@ class ReservationResource extends Resource
                 Tables\Columns\TextColumn::make('canceled_at')
                     ->dateTime()
                     ->sortable(),
-
                 Tables\Columns\TextColumn::make('note')
                     ->searchable(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('restaurant')
+                    ->relationship('restaurant', 'name')
+                    ->placeholder(__('All restaurants')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
