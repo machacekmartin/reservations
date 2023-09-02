@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ReservationStatus;
 use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -14,44 +15,50 @@ class ReservationFactory extends Factory
 {
     public function definition(): array
     {
-        $startAt = $this->faker->dateTimeBetween('-1 day', '+1 day');
+        $startAt = $this->faker->dateTimeBetween('+1 hour', '+2 hours');
 
         return [
             'start_at' => $startAt,
             'end_at' => Carbon::instance($startAt)->addSeconds($this->faker->numberBetween(1800, 10800)),
             'remind_at' => Carbon::instance($startAt)->subSeconds($this->faker->numberBetween(900, 7200)),
+            'arrived_at' => null,
+            'canceled_at' => null,
             'guest_count' => $this->faker->numberBetween(1, 10),
             'note' => $this->faker->sentence(),
+            'status' => ReservationStatus::PENDING,
             'user_id' => User::factory(),
             'restaurant_id' => Restaurant::factory(),
         ];
     }
 
-    public function canceled(): self
+    public function late(): self
     {
         return $this->state([
-            'canceled_at' => $this->faker->dateTimeBetween('-1 day', '+1 day'),
+            'status' => ReservationStatus::LATE,
+            'start_at' => now()->subMinutes(10)
         ]);
     }
 
-    public function arrived(): self
+    public function canceled(): self
     {
-        return $this->state([
-            'arrived_at' => $this->faker->dateTimeBetween('-1 day', '+1 day'),
+        return $this->state(fn (array $attributes) => [
+            'status' => ReservationStatus::CANCELED,
+            'canceled_at' => Carbon::instance($attributes['start_at'])->subMinutes(10),
         ]);
     }
 
     public function fulfilled(): self
     {
-        return $this->state([
-            'fulfilled' => true,
+        return $this->state(fn (array $attributes) => [
+            'status' => ReservationStatus::FULFILLED,
+            'arrived_at' => Carbon::instance($attributes['start_at'])->subMinutes(10),
         ]);
     }
 
-    public function unfulfilled(): self
+    public function missed(): self
     {
         return $this->state([
-            'fulfilled' => false,
+            'status' => ReservationStatus::MISSED,
         ]);
     }
 
