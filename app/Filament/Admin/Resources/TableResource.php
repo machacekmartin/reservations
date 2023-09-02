@@ -15,7 +15,7 @@ class TableResource extends Resource
 {
     protected static ?string $model = TableModel::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
     public static function form(Form $form): Form
     {
@@ -57,7 +57,7 @@ class TableResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('current_occupancy')
-                    ->label(__('Currently available'))
+                    ->label('Currently available')
                     ->getStateUsing(fn (TableModel $record) => ! $record->isOccupied())
                     ->boolean(),
             ])
@@ -95,7 +95,7 @@ class TableResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('Restaurant management');
+        return 'Restaurant management';
     }
 
     public static function getGloballySearchableAttributes(): array
@@ -117,8 +117,8 @@ class TableResource extends Resource
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
-            (string) __('Capacity') => (string) $record->capacity,
-            (string) __('Occuiped') => $record->isOccupied() ? __('Yes') : __('No'),
+            'Capacity' => (string) $record->capacity,
+            'Occuiped' => $record->isOccupied() ? 'Yes' : 'No',
         ];
     }
 }

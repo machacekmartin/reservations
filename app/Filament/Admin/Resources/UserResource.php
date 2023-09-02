@@ -74,7 +74,7 @@ class UserResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('reservations')
-                    ->label('# of ' . __('Reservations'))
+                    ->label('# of ' . 'Reservations')
                     ->getStateUsing(fn (User $record) => $record->reservations()->count())
                     ->extraCellAttributes(['class' => 'w-full']),
             ])
@@ -112,7 +112,7 @@ class UserResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('User management');
+        return 'User management';
     }
 
     public static function getGloballySearchableAttributes(): array
@@ -134,7 +134,7 @@ class UserResource extends Resource
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
-            (string) __('Email') => $record->email,
+            'Email' => $record->email,
         ];
     }
 }

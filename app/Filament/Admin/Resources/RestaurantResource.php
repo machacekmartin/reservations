@@ -14,7 +14,7 @@ class RestaurantResource extends Resource
 {
     protected static ?string $model = Restaurant::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
 
     public static function form(Form $form): Form
     {
@@ -77,6 +77,6 @@ class RestaurantResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('Restaurant management');
+        return 'Restaurant management';
     }
 }

@@ -98,7 +98,7 @@ class ReservationResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('restaurant')
                     ->relationship('restaurant', 'name')
-                    ->placeholder(__('All restaurants')),
+                    ->placeholder('All restaurants'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -138,7 +138,7 @@ class ReservationResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('Restaurant management');
+        return 'Restaurant management';
     }
 
     public static function getGloballySearchableAttributes(): array
@@ -151,7 +151,7 @@ class ReservationResource extends Resource
      */
     public static function getGlobalSearchResultTitle(Model $record): string
     {
-        return __('Starts at') . ' ' . $record->start_at->format('Y-m-d H:i');
+        return 'Starts at ' . $record->start_at->format('Y-m-d H:i');
     }
 
     /**
@@ -160,8 +160,8 @@ class ReservationResource extends Resource
     public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
-            (string) __('User') => $record->user->name,
-            (string) __('Note') => $record->note ?? '-',
+            'User' => $record->user->name,
+            'Note' => $record->note ?? '-',
         ];
     }
 
