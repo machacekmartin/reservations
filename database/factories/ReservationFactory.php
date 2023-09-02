@@ -35,7 +35,7 @@ class ReservationFactory extends Factory
     {
         return $this->state([
             'status' => ReservationStatus::LATE,
-            'start_at' => now()->subMinutes(10)
+            'start_at' => now()->subMinutes(10),
         ]);
     }
 
