@@ -36,7 +36,6 @@ class TableResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultGroup('restaurant.name')
             ->paginationPageOptions([25, 50, 100])
             ->columns([
                 Tables\Columns\TextColumn::make('label')
@@ -50,9 +49,7 @@ class TableResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('restaurant')
-                    ->relationship('restaurant', 'name')
-                    ->placeholder('All restaurants'),
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -2,14 +2,13 @@
 
 use App\Enums\ReservationStatus;
 use App\Models\Reservation;
-use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 
 it('generates plain reservation', function () {
     $reservation = Reservation::factory()->create();
 
-    expect($reservation->toArray())->toHaveCount(14);
+    expect($reservation->toArray())->toHaveCount(13);
 
     expect($reservation)
         ->start_at->toBeInstanceOf(Carbon::class)
@@ -21,8 +20,7 @@ it('generates plain reservation', function () {
         ->status->toBe(ReservationStatus::PENDING)
         ->canceled_at->toBeNull()
         ->arrived_at->toBeNull()
-        ->user->toBeInstanceOf(User::class)
-        ->restaurant->toBeInstanceOf(Restaurant::class);
+        ->user->toBeInstanceOf(User::class);
 
     expect($reservation->start_at->isAfter(now()))->toBeTrue();
 });

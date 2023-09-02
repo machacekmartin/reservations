@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Restaurant;
 use App\Models\Table;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +11,6 @@ class TableSeeder extends Seeder
     {
         Table::factory()
             ->count(20)
-            ->recycle(Restaurant::all())
             ->create();
     }
 }

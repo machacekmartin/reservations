@@ -24,7 +24,6 @@ return new class extends Migration
             $table->boolean('reminded')->default(false);
 
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('restaurant_id')->constrained();
         });
     }
 };

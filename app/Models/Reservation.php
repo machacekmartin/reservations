@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Builders\ReservationBuilder;
 use App\Enums\ReservationStatus;
-use App\Traits\BelongsToRestaurant;
 use Database\Factories\ReservationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Reservation extends Model
 {
-    use BelongsToRestaurant, HasFactory;
+    use HasFactory;
 
     protected $fillable = [
         'start_at',

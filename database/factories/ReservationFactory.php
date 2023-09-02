@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\ReservationStatus;
-use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
@@ -28,7 +27,6 @@ class ReservationFactory extends Factory
             'reminded' => false,
             'status' => ReservationStatus::PENDING,
             'user_id' => User::factory(),
-            'restaurant_id' => Restaurant::factory(),
         ];
     }
 
