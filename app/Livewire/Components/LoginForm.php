@@ -6,6 +6,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class LoginForm extends Component implements HasForms
@@ -15,7 +16,7 @@ class LoginForm extends Component implements HasForms
     public string $email;
     public string $password;
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.components.login-form');
     }

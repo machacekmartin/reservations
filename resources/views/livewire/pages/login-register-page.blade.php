@@ -4,14 +4,14 @@
             <x-filament::icon class="w-12 h-12 rotate-[-10deg] text-rose-600 fi-sidebar-group-icon dark:text-rose-500"
                 icon="heroicon-o-calendar-days" />
             <h2 class="mt-4 text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                @if($showRegisterForm)
+                @if ($showRegisterForm)
                     Create new account
                 @else
                     Sign in to make a reservation
                 @endif
             </h2>
             <p class="mt-2 mb-4 text-sm leading-6 text-gray-500">
-                @if($showRegisterForm)
+                @if ($showRegisterForm)
                     Already have an account?
                     <a href="#" class="font-semibold text-rose-600 hover:text-rose-500" wire:click="showLogin">Sign In.</a>
                 @else
@@ -19,7 +19,7 @@
                     <a href="#" class="font-semibold text-rose-600 hover:text-rose-500" wire:click="showRegister">Make one.</a>
                 @endif
             </p>
-            @if($showRegisterForm)
+            @if ($showRegisterForm)
                 <!-- register -->
             @else
                 <livewire:components.login-form />
