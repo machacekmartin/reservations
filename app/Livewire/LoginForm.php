@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Components;
+namespace App\Livewire;
 
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
@@ -21,11 +21,6 @@ class LoginForm extends Component implements HasForms
     public string $email;
     public string $password;
     public bool $remember = false;
-
-    public function render(): View
-    {
-        return view('livewire.components.login-form');
-    }
 
     public function form(Form $form): Form
     {

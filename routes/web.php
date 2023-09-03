@@ -1,8 +1,8 @@
 <?php
 
-use App\Livewire\Pages\LoginPage;
+use App\Actions\LogoutUserAction;
+use App\Http\Controllers\LogoutUserController;
 use App\Livewire\Pages\RegisterPage;
-use App\Livewire\Pages\ReservationsPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,15 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Routes that require user to be logged in
 Route::middleware('auth')->group(function () {
-    Route::get('/', ReservationsPage::class)->name('reservations');
-    Route::post('logout', function () {
-        auth()->logout();
-        redirect()->to('login');
-    })->name('logout');
+    Route::view('/', 'components.pages.reservations-page')->name('reservations');
+    Route::post('logout', LogoutUserController::class)->name('logout');
 });
 
-Route::middleware('guest')->group(function () {
-    Route::get('login', LoginPage::class)->name('login');
-    Route::get('register', RegisterPage::class)->name('register');
-});
+// Routes that require user to NOT be logged in
+Route::view('login', 'components.pages.login-page')->name('login')->middleware('guest');
+Route::view('register', 'components.pages.register-page')->name('register')->middleware('guest');

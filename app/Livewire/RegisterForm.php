@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Components;
+namespace App\Livewire;
 
 use App\Models\User;
 use Filament\Forms\Components\Grid;
@@ -22,11 +22,6 @@ class RegisterForm extends Component implements HasForms
     public string $name;
     public string $password;
     public string $password_confirmation;
-
-    public function render(): View
-    {
-        return view('livewire.components.register-form');
-    }
 
     public function form(Form $form): Form
     {
