@@ -24,7 +24,7 @@ class ReservationsPage extends Component
         $reservations = auth()->user()?->reservations;
 
         return view('components.pages.reservations-page', [
-            'reservations' => $reservations
+            'reservations' => $reservations,
         ]);
     }
 }

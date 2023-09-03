@@ -1,8 +1,6 @@
 <?php
 
-use App\Actions\LogoutUserAction;
 use App\Http\Controllers\LogoutUserController;
-use App\Livewire\Pages\RegisterPage;
 use Illuminate\Support\Facades\Route;
 
 /*
