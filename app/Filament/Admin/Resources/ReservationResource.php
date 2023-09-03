@@ -5,10 +5,12 @@ namespace App\Filament\Admin\Resources;
 use App\Enums\ReservationStatus;
 use App\Filament\Admin\Resources\ReservationResource\Pages;
 use App\Models\Reservation;
+use App\Models\Table as ModelsTable;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +28,7 @@ class ReservationResource extends Resource
                 Forms\Components\Fieldset::make('General information')
                     ->schema([
                         Forms\Components\Select::make('user_id')
-                            ->relationship('user', 'name')
+                            ->relationship('user', 'email')
                             ->required(),
                         Forms\Components\TextInput::make('guest_count')
                             ->required()
@@ -36,6 +38,12 @@ class ReservationResource extends Resource
                         Forms\Components\Select::make('status')
                             ->options(ReservationStatus::class)
                             ->required(),
+                        Forms\Components\Select::make('tables')
+                            ->relationship('tables', 'label')
+                            ->multiple()
+                            ->preload()
+                            ->required()
+                            ->columnSpanFull()
                     ]),
                 Forms\Components\Fieldset::make('Time details')
                     ->schema([
@@ -62,13 +70,15 @@ class ReservationResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultGroup('status')
             ->paginationPageOptions([25, 50, 100])
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->description(fn (Reservation $record) => $record->user->email)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->badge(),
+                    ->badge()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('tables.label')
                     ->getStateUsing(fn (Reservation $record) => $record->tables->pluck('label')->join(', '))
                     ->searchable(),
@@ -94,7 +104,15 @@ class ReservationResource extends Resource
                     ->searchable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->options(ReservationStatus::class)
+                    ->multiple()
+                    ->label('Status'),
+
+                SelectFilter::make('user_id')
+                    ->relationship('user', 'name')
+                    ->multiple()
+                    ->label('User'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
