@@ -18,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', ReservationsPage::class)->name('reservations');
-    Route::post('logout', function () { auth()->logout(); redirect()->to('login'); })->name('logout');
+    Route::post('logout', function () {
+        auth()->logout();
+        redirect()->to('login');
+    })->name('logout');
 });
 
 Route::middleware('guest')->group(function () {

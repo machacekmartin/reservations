@@ -3,7 +3,6 @@
 namespace App\Livewire\Components;
 
 use App\Models\User;
-use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -55,7 +54,7 @@ class RegisterForm extends Component implements HasForms
                     ->password()
                     ->prefixIcon('heroicon-o-lock-closed')
                     ->autocomplete(false)
-                    ->required()
+                    ->required(),
             ]);
     }
 
