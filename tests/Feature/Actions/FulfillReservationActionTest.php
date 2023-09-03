@@ -1,6 +1,5 @@
 <?php
 
-use App\Actions\CancelReservationAction;
 use App\Actions\FulfillReservationAction;
 use App\Enums\ReservationStatus;
 use App\Exceptions\CannotTransitionReservationStatus;
