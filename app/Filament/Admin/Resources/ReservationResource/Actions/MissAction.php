@@ -14,7 +14,7 @@ class MissAction extends Action
     {
         return parent::make($name)
             ->label('Did not arrive')
-            ->disabled(fn (Reservation $record) => ! in_array($record->status, [ReservationStatus::PENDING, ReservationStatus::LATE]))
+            ->disabled(fn (Reservation $record) => $record->status !== ReservationStatus::LATE)
             ->icon(ReservationStatus::MISSED->getIcon())
             ->color(ReservationStatus::MISSED->getColor())
             ->modalWidth('max-w-xl')
