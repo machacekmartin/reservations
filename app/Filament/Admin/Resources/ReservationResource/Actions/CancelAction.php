@@ -2,12 +2,13 @@
 
 namespace App\Filament\Admin\Resources\ReservationResource\Actions;
 
+use App\Actions\CancelReservationAction;
 use App\Enums\ReservationStatus;
 use App\Models\Reservation;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 
-class CancelReservationAction extends Action
+class CancelAction extends Action
 {
     public static function make(string $name = null): static
     {
@@ -24,10 +25,8 @@ class CancelReservationAction extends Action
             ->modalDescription('Are you sure you want to cancel this reservation?')
             ->modalSubmitActionLabel('Yes, cancel reservation')
             ->modalCancelActionLabel('No')
-            ->action(function (Reservation $record): void {
-                $record->canceled_at = now();
-                $record->status = ReservationStatus::CANCELED;
-                $record->save();
+            ->action(function (Reservation $record, CancelReservationAction $cancelReservationAction) {
+                $cancelReservationAction->run($record);
                 Notification::make()->success()->title('Reservation canceled')->send();
             });
     }

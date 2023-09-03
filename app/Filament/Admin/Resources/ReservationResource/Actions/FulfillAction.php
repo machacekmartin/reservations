@@ -2,13 +2,15 @@
 
 namespace App\Filament\Admin\Resources\ReservationResource\Actions;
 
+use App\Actions\FulfillReservationAction;
 use App\Enums\ReservationStatus;
 use App\Models\Reservation;
 use Filament\Actions\Action;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Notifications\Notification;
+use Illuminate\Support\Carbon;
 
-class FulfillReservationAction extends Action
+class FulfillAction extends Action
 {
     public static function make(string $name = null): static
     {
@@ -30,10 +32,8 @@ class FulfillReservationAction extends Action
                     ->seconds(false)
                     ->default(now()),
             ])
-            ->action(function (array $data, Reservation $record): void {
-                $record->arrived_at = $data['arrived_at'];
-                $record->status = ReservationStatus::FULFILLED;
-                $record->save();
+            ->action(function (array $data, Reservation $record, FulfillReservationAction $fulfillReservationAction): void {
+                $fulfillReservationAction->run($record, Carbon::createFromTimeString($data['arrived_at']));
                 Notification::make()->success()->title('Reservation fulfilled')->send();
             });
     }

@@ -2,12 +2,13 @@
 
 namespace App\Filament\Admin\Resources\ReservationResource\Actions;
 
+use App\Actions\MissReservationAction;
 use App\Enums\ReservationStatus;
 use App\Models\Reservation;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 
-class MissReservationAction extends Action
+class MissAction extends Action
 {
     public static function make(string $name = null): static
     {
@@ -23,9 +24,8 @@ class MissReservationAction extends Action
             ->modalIcon(ReservationStatus::MISSED->getIcon())
             ->modalDescription('Are you sure the guests did not arrive?')
             ->modalSubmitActionLabel('Confirm')
-            ->action(function (Reservation $record): void {
-                $record->status = ReservationStatus::MISSED;
-                $record->save();
+            ->action(function (Reservation $record, MissReservationAction $missReservationAction): void {
+                $missReservationAction->run($record);
                 Notification::make()->success()->title('Reservation marked as missed')->send();
             });
     }
