@@ -5,7 +5,6 @@ namespace App\Filament\Admin\Resources;
 use App\Enums\ReservationStatus;
 use App\Filament\Admin\Resources\ReservationResource\Pages;
 use App\Models\Reservation;
-use App\Models\Table as ModelsTable;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -43,7 +42,7 @@ class ReservationResource extends Resource
                             ->multiple()
                             ->preload()
                             ->required()
-                            ->columnSpanFull()
+                            ->columnSpanFull(),
                     ]),
                 Forms\Components\Fieldset::make('Time details')
                     ->schema([
