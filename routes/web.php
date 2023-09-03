@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('auth')->group(function() {
+    Route::get('/', Pages\ReservationsPage::class)->name('reservations');
+    Route::get('/reservations', Pages\ReservationsPage::class)->name('reservations');
 });
+
 Route::get('/login', Pages\LoginRegisterPage::class)->name('login')->middleware('guest');
