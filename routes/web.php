@@ -1,6 +1,8 @@
 <?php
 
-use App\Livewire\Pages;
+use App\Livewire\Pages\LoginPage;
+use App\Livewire\Pages\RegisterPage;
+use App\Livewire\Pages\ReservationsPage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', Pages\ReservationsPage::class)->name('reservations');
-    Route::get('reservations', Pages\ReservationsPage::class)->name('reservations');
+    Route::get('/', ReservationsPage::class)->name('reservations');
+    Route::post('logout', function () { auth()->logout(); redirect()->to('login'); })->name('logout');
 });
 
-Route::get('login', Pages\LoginRegisterPage::class)->name('login')->middleware('guest');
+Route::middleware('guest')->group(function () {
+    Route::get('login', LoginPage::class)->name('login');
+    Route::get('register', RegisterPage::class)->name('register');
+});

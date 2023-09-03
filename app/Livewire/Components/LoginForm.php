@@ -2,19 +2,26 @@
 
 namespace App\Livewire\Components;
 
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Livewire\Component;
 
+/**
+ * @property-read Form $form
+ */
 class LoginForm extends Component implements HasForms
 {
     use InteractsWithForms;
 
     public string $email;
     public string $password;
+    public bool $remember = false;
 
     public function render(): View
     {
@@ -26,32 +33,37 @@ class LoginForm extends Component implements HasForms
         return $form
             ->schema([
                 TextInput::make('email')
-                    ->placeholder('user@reservations.test')
+                    ->placeholder('walter@white.bb')
+                    ->required()
                     ->email()
-                    ->required(),
+                    ->autocomplete()
+                    ->autofocus(),
                 TextInput::make('password')
                     ->password()
-                    ->minLength(4)
-                    ->required(),
+                    ->required()
+                    ->prefixIcon('heroicon-o-lock-closed')
+                    ->autocomplete(),
+                Checkbox::make('remember')
+                    ->label('Remember me')
+                    ->default(false),
             ]);
-    }
-
-    public function notify(): void
-    {
-        $this->dispatch('notify', 'LULIK');
     }
 
     public function login(): void
     {
+        $this->form->validate();
+
         $logged = auth()->attempt([
             'email' => $this->email,
             'password' => $this->password,
-        ]);
+        ], $this->remember);
 
-        if ($logged) {
-            redirect()->route('reservations');
-        } else {
-            session()->flash('error', 'email and password are wrong.');
+        if (! $logged) {
+            throw ValidationException::withMessages([
+                'email' => __('filament-panels::pages/auth/login.messages.failed'),
+            ]);
         }
+
+        redirect()->to(route('reservations'));
     }
 }
