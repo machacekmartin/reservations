@@ -11,6 +11,4 @@
                 Register
         </x-filament::button>
     </form>
-
-    <x-filament-actions::modals />
 </div>
