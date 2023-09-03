@@ -9,7 +9,7 @@ class CannotTransitionReservationStatus extends Exception
 {
     public Reservation $reservation;
 
-    public static function for(Reservation $reservation, string $message): static
+    public static function for(Reservation $reservation, string $message): self
     {
         $instance = new self($message);
 
@@ -18,6 +18,9 @@ class CannotTransitionReservationStatus extends Exception
         return $instance;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function context(): array
     {
         return $this->reservation->toArray();
