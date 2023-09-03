@@ -18,6 +18,9 @@ class ReservationsRelationManager extends RelationManager
         $table->getAction('edit')
             ?->action(fn (Reservation $record) => redirect()->to(ReservationResource::getUrl('edit', ['record' => $record])));
 
+        $table->getColumn('user.name')
+            ?->hidden();
+
         return $table;
     }
 }
