@@ -13,7 +13,6 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Panel\Concerns\HasNotifications;
-use Filament\Support\Colors\Color;
 use Livewire\Component;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
@@ -47,7 +46,6 @@ class EditUserForm extends Component implements HasForms
                     ->minLength(4)
                     ->maxLength(50),
 
-                //must be phone format
                 PhoneInput::make('phone')
                     ->rule('phone'),
 
@@ -55,12 +53,10 @@ class EditUserForm extends Component implements HasForms
                     Action::make('submit')
                         ->action(fn () => $this->submit())
                         ->label('Save changes')
-                        ->color(Color::Rose)
                         ->icon('heroicon-o-check'),
 
                     Action::make('cancel')
                         ->action(fn () => $this->cancel())
-                        ->color(Color::Gray)
                         ->label('Cancel')
                         ->extraAttributes(['class' => 'ml-auto'])
                         ->link()

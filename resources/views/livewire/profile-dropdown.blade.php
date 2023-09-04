@@ -9,7 +9,7 @@
         id="user-menu-button"
         aria-haspopup="true"
         aria-expanded="false"
-        class="relative flex text-sm transition-all bg-gray-800 rounded-full ring ring-rose-500 hover:outline-none hover:ring-2 hover:ring-white hover:ring-offset-2 hover:ring-offset-gray-800"
+        class="relative flex text-sm transition-all bg-gray-800 rounded-full ring ring-primary-500 hover:outline-none hover:ring-2 hover:ring-white hover:ring-offset-2 hover:ring-offset-gray-800"
         x-on:click="toggleProfileDropdown"
     >
         <span class="sr-only">Open user menu</span>
