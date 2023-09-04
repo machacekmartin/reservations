@@ -27,6 +27,7 @@
     >
         <a
             href="{{ route('edit-account') }}"
+            wire:navigate
             id="user-menu-item-1"
             role="menuitem"
             tabindex="-1"
@@ -37,7 +38,8 @@
         </a>
 
         <a
-            href="#"
+            href="{{ route('reservations') }}"
+            wire:navigate
             id="user-menu-item-1"
             role="menuitem"
             tabindex="-1"
