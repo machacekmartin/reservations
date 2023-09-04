@@ -26,7 +26,7 @@
         x-transition
     >
         <a
-            href="#"
+            href="{{ route('edit-account') }}"
             id="user-menu-item-1"
             role="menuitem"
             tabindex="-1"

@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\LogoutUserController;
+use App\View\Components\Pages\EditUserPage;
+use App\View\Components\Pages\LoginPage;
+use App\View\Components\Pages\RegisterPage;
+use App\View\Components\Pages\ReservationsPage;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,10 +21,11 @@ use Illuminate\Support\Facades\Route;
 
 // Routes that require user to be logged in
 Route::middleware('auth')->group(function () {
-    Route::view('/', 'components.pages.reservations-page')->name('reservations');
+    Route::get('/', fn () => Blade::renderComponent(new ReservationsPage))->name('reservations');
+    Route::get('account', fn () => Blade::renderComponent(new EditUserPage))->name('edit-account');
     Route::post('logout', LogoutUserController::class)->name('logout');
 });
 
 // Routes that require user to NOT be logged in
-Route::view('login', 'components.pages.login-page')->name('login')->middleware('guest');
-Route::view('register', 'components.pages.register-page')->name('register')->middleware('guest');
+Route::get('login', fn () => Blade::renderComponent(new LoginPage))->name('login')->middleware('guest');
+Route::get('register', fn () => Blade::renderComponent(new RegisterPage))->name('register')->middleware('guest');
