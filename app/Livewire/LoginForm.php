@@ -2,11 +2,16 @@
 
 namespace App\Livewire;
 
+use Filament\Forms\Components\Actions;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Filament\Panel\Concerns\HasColors;
+use Filament\Support\Colors\Color;
+use Filament\Support\Contracts\HasColor;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
@@ -39,6 +44,14 @@ class LoginForm extends Component implements HasForms
                 Checkbox::make('remember')
                     ->label('Remember me')
                     ->default(false),
+                Actions::make([
+                    Action::make('login')
+                        ->label('Sign in')
+                        ->action(fn () => $this->login())
+                        ->icon('heroicon-o-arrow-right')
+                        ->iconPosition('after')
+                        ->extraAttributes(['class' => 'w-full'])
+                ])
             ]);
     }
 
