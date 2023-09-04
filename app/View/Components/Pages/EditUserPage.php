@@ -19,7 +19,7 @@ class EditUserPage extends Component
     public function render(): View|Closure|string
     {
         return view('components.pages.edit-user-page', [
-            'data' => 'hehe'
+            'user' => auth()->user()
         ]);
     }
 }

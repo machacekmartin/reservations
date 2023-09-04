@@ -31,11 +31,14 @@ class UserResource extends Resource
                 Forms\Components\Grid::make(1)->schema([
                     Forms\Components\TextInput::make('name')
                         ->required()
-                        ->maxLength(255),
+                        ->minLength(4)
+                        ->alphaNum()
+                        ->maxLength(50),
 
                     Forms\Components\TextInput::make('email')
                         ->email()
                         ->required()
+                        ->unique('users', 'email')
                         ->maxLength(255),
 
                     PhoneInput::make('phone'),
