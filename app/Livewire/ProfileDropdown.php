@@ -16,7 +16,7 @@ class ProfileDropdown extends Component
 
     public function mount(): void
     {
-        $this->avatarUrl = $this->user ? Filament::getUserAvatarUrl($this->user) : null;
+        $this->avatarUrl = $this->user->avatar ?? Filament::getUserAvatarUrl($this->user);
     }
 
     #[Computed()]
