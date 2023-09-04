@@ -48,7 +48,7 @@ class LoginForm extends Component implements HasForms
                     Action::make('login')
                         ->label('Sign in')
                         ->action(fn () => $this->login())
-                        ->icon('heroicon-o-arrow-right')
+                        ->icon('heroicon-o-arrow-long-right')
                         ->iconPosition('after')
                         ->extraAttributes(['class' => 'w-full'])
                 ])

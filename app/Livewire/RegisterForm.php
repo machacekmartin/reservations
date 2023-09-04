@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Filament\Forms\Components\Actions;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -51,6 +53,14 @@ class RegisterForm extends Component implements HasForms
                     ->prefixIcon('heroicon-o-lock-closed')
                     ->autocomplete(false)
                     ->required(),
+                Actions::make([
+                    Action::make('register')
+                        ->label('Register')
+                        ->action(fn () => $this->register())
+                        ->icon('heroicon-o-arrow-long-right')
+                        ->iconPosition('after')
+                        ->extraAttributes(['class' => 'w-full'])
+                ])
             ]);
     }
 
