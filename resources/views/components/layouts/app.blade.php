@@ -6,13 +6,15 @@
 
         <title>Test page</title>
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
         @filamentStyles
+        @vite('resources/css/app.css')
     </head>
 
     <body class="antialiased">
         {{ $slot }}
 
         @filamentScripts
+        @vite('resources/js/app.js')
+        @livewire('notifications')
     </body>
 </html>
