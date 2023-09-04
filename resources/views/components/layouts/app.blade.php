@@ -6,15 +6,16 @@
 
         <title>Test page</title>
 
+        @livewire('notifications')
+
         @filamentStyles
+        @filamentScripts
+
         @vite('resources/css/app.css')
+        @vite('resources/js/app.js')
     </head>
 
     <body class="antialiased">
         {{ $slot }}
-
-        @filamentScripts
-        @vite('resources/js/app.js')
-        @livewire('notifications')
     </body>
 </html>
