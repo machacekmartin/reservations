@@ -59,8 +59,8 @@ class RegisterForm extends Component implements HasForms
                         ->action(fn () => $this->register())
                         ->icon('heroicon-o-arrow-long-right')
                         ->iconPosition('after')
-                        ->extraAttributes(['class' => 'w-full'])
-                ])
+                        ->extraAttributes(['class' => 'w-full']),
+                ]),
             ]);
     }
 

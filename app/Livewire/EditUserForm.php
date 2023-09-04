@@ -6,7 +6,6 @@ use App\Models\User;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -21,8 +20,8 @@ use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
  */
 class EditUserForm extends Component implements HasForms
 {
-    use InteractsWithForms;
     use HasNotifications;
+    use InteractsWithForms;
 
     /**
      * @var array<string, mixed>
@@ -66,8 +65,8 @@ class EditUserForm extends Component implements HasForms
                         ->action(fn () => $this->cancel())
                         ->label('Cancel')
                         ->extraAttributes(['class' => 'ml-auto'])
-                        ->link()
-                ])
+                        ->link(),
+                ]),
             ])
             ->statePath('data')
             ->model($this->user);

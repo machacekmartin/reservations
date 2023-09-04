@@ -9,9 +9,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
-use Filament\Panel\Concerns\HasColors;
-use Filament\Support\Colors\Color;
-use Filament\Support\Contracts\HasColor;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
@@ -50,8 +47,8 @@ class LoginForm extends Component implements HasForms
                         ->action(fn () => $this->login())
                         ->icon('heroicon-o-arrow-long-right')
                         ->iconPosition('after')
-                        ->extraAttributes(['class' => 'w-full'])
-                ])
+                        ->extraAttributes(['class' => 'w-full']),
+                ]),
             ]);
     }
 

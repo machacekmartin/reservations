@@ -11,7 +11,9 @@ class EditUserPage extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     /**
      * Get the view / contents that represent the component.
@@ -19,7 +21,7 @@ class EditUserPage extends Component
     public function render(): View|Closure|string
     {
         return view('components.pages.edit-user-page', [
-            'user' => auth()->user()
+            'user' => auth()->user(),
         ]);
     }
 }
