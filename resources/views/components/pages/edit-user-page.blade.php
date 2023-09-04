@@ -1,5 +1,5 @@
 <x-layouts.user>
     <div>
-        {{ $data }}
+        <livewire:edit-user-form :user="$user" />
     </div>
 </x-layouts>
