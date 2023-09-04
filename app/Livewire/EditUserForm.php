@@ -16,12 +16,19 @@ use Filament\Panel\Concerns\HasNotifications;
 use Livewire\Component;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
+/**
+ * @property-read Form $form
+ */
 class EditUserForm extends Component implements HasForms
 {
     use InteractsWithForms;
     use HasNotifications;
 
+    /**
+     * @var array<string, mixed>
+     */
     public array $data;
+
     public User $user;
 
     public function mount(User $user): void
