@@ -16,6 +16,7 @@ class TableFactory extends Factory
             'available' => $this->faker->boolean(80),
             'capacity' => $this->faker->numberBetween(1, 10),
             'location' => [],
+            'size' => [],
         ];
     }
 }

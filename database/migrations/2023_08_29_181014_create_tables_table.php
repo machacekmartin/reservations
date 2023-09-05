@@ -16,6 +16,7 @@ return new class extends Migration
             $table->boolean('available');
             $table->unsignedInteger('capacity');
             $table->json('location');
+            $table->json('size');
         });
     }
 };

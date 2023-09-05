@@ -19,10 +19,12 @@ class Table extends Model
         'available',
         'capacity',
         'location',
+        'size',
     ];
 
     protected $casts = [
         'location' => 'array',
+        'size' => 'array',
     ];
 
     public function reservations(): BelongsToMany
