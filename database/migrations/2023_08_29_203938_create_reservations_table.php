@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('note')->nullable();
             $table->boolean('reminded')->default(false);
 
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
         });
     }
 };
