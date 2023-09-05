@@ -115,7 +115,7 @@ class UserResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'User management';
+        return 'Manual management';
     }
 
     public static function getGloballySearchableAttributes(): array

@@ -7,10 +7,17 @@ use App\Filament\Admin\Resources\ReservationResource\Pages;
 use App\Models\Reservation;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -90,17 +97,6 @@ class ReservationResource extends Resource
                 Tables\Columns\TextColumn::make('end_at')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('remind_at')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('arrived_at')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('canceled_at')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('note')
-                    ->searchable(),
             ])
             ->filters([
                 SelectFilter::make('status')
@@ -114,15 +110,12 @@ class ReservationResource extends Resource
                     ->label('User'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])
-            ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
             ]);
     }
 
@@ -151,7 +144,7 @@ class ReservationResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Restaurant management';
+        return 'Manual management';
     }
 
     public static function getGloballySearchableAttributes(): array

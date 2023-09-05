@@ -82,7 +82,7 @@ class TableResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Restaurant management';
+        return 'Manual management';
     }
 
     public static function getGloballySearchableAttributes(): array
