@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Data\Dimensions;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property-read Reservation|null $currentReservation
+ * @property-read Dimensions $dimensions
  */
 class Table extends Model
 {
@@ -23,8 +25,7 @@ class Table extends Model
     ];
 
     protected $casts = [
-        'location' => 'array',
-        'size' => 'array',
+        'dimensions' => Dimensions::class,
     ];
 
     public function reservations(): BelongsToMany

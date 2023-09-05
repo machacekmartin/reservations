@@ -44,6 +44,7 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 //
             ])
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
