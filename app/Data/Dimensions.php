@@ -11,5 +11,6 @@ class Dimensions extends Data
         public int $height,
         public int $x,
         public int $y,
-    ) {}
+    ) {
+    }
 }

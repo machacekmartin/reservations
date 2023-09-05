@@ -12,7 +12,7 @@ class TableFactory extends Factory
     public function definition(): array
     {
         return [
-            'label' => $this->faker->randomLetter(). $this->faker->randomLetter(),
+            'label' => $this->faker->randomLetter() . $this->faker->randomLetter(),
             'available' => $this->faker->boolean(80),
             'capacity' => $this->faker->numberBetween(1, 10),
             'dimensions' => [
