@@ -31,11 +31,7 @@ class EditInteractiveTables extends InteractiveTables implements InteractiveTabl
 
     public function getTableClasses(Table $table): array
     {
-        return [
-            'p-3 font-bold text-white uppercase transition-transform shadow-2xl rounded-xl ring ring-white/20 hover:scale-105 active:scale-110',
-            'bg-gradient-to-tr from-blue-500/60 to-green-400/60' => $table->available,
-            'bg-gradient-to-tr from-gray-200/60 to-gray-400' => ! $table->available,
-        ];
+        return [];
     }
 
     public function getTableInnerView(Table $table): string
@@ -55,7 +51,7 @@ class EditInteractiveTables extends InteractiveTables implements InteractiveTabl
                 $record->update($data);
             })
             ->modalWidth('2xl')
-            ->modalHeading(fn (Table $record) => 'Edit table ' . $record->label)
+            ->modalHeading(fn (Table $record) => 'Edit table '. $record->label)
             ->form([
                 Section::make()
                     ->columns(6)
