@@ -11,6 +11,19 @@ use Filament\Forms\Components\Toggle;
 
 class EditInteractiveTables extends InteractiveTables implements InteractiveTable
 {
+    public function onTableClick(Table $table): void
+    {
+        $this->mountAction('clickAction', ['record' => $table]);
+    }
+
+    public function onTableDragEnd(Table $table, int $x, int $y): void
+    {
+        $table->dimensions->x = $x;
+        $table->dimensions->y = $y;
+
+        $table->save();
+    }
+
     public function getTableDraggable(Table $table): bool
     {
         return true;
@@ -23,19 +36,6 @@ class EditInteractiveTables extends InteractiveTables implements InteractiveTabl
             'bg-gradient-to-tr from-blue-500/60 to-green-400/60' => $table->available,
             'bg-gradient-to-tr from-gray-200/60 to-gray-400' => ! $table->available,
         ];
-    }
-
-    public function onTableClick(Table $table): void
-    {
-        $this->mountAction('clickAction', ['record' => $table]);
-    }
-
-    public function onTableDragEnd(Table $table, int $x, int $y): void
-    {
-        $table->dimensions->x = $x;
-        $table->dimensions->y = $y;
-
-        $table->save();
     }
 
     public function clickAction(): mixed
