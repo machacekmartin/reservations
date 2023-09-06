@@ -8,6 +8,7 @@ use Filament\Actions\Action;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Illuminate\View\View;
 
 class EditInteractiveTables extends InteractiveTables implements InteractiveTable
 {
@@ -36,6 +37,11 @@ class EditInteractiveTables extends InteractiveTables implements InteractiveTabl
             'bg-gradient-to-tr from-blue-500/60 to-green-400/60' => $table->available,
             'bg-gradient-to-tr from-gray-200/60 to-gray-400' => ! $table->available,
         ];
+    }
+
+    public function getTableInnerView(Table $table): string
+    {
+        return 'table-inner';
     }
 
     public function clickAction(): mixed
