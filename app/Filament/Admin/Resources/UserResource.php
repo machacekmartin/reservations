@@ -41,14 +41,23 @@ class UserResource extends Resource
                         ->unique('users', 'email')
                         ->maxLength(255),
 
+                    Forms\Components\TextInput::make('password')
+                        ->password()
+                        ->minLength(8)
+                        ->prefixIcon('heroicon-o-lock-closed')
+                        ->hiddenOn('edit')
+                        ->autocomplete(false)
+                        ->required(),
+
                     PhoneInput::make('phone'),
 
                     Forms\Components\DateTimePicker::make('email_verified_at'),
 
                     Forms\Components\Select::make('roles')
                         ->multiple()
+                        ->minItems(1)
+                        ->preload()
                         ->relationship('roles', 'name')
-                        ->disabled(),
                 ])->columnSpan(4),
             ])->columns(5);
     }
