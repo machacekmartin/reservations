@@ -11,7 +11,7 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 
-class EditInteractiveTables extends InteractiveTables implements InteractiveTable, HasActions, HasForms
+class EditInteractiveTables extends InteractiveTables implements HasActions, HasForms, InteractiveTable
 {
     use InteractsWithActions;
     use InteractsWithForms;

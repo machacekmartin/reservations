@@ -57,7 +57,7 @@ class UserResource extends Resource
                         ->multiple()
                         ->minItems(1)
                         ->preload()
-                        ->relationship('roles', 'name')
+                        ->relationship('roles', 'name'),
                 ])->columnSpan(4),
             ])->columns(5);
     }
