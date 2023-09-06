@@ -2,8 +2,12 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Data\Dimensions;
 use App\Filament\Admin\Resources\TableResource\Pages;
+use App\Filament\Admin\Resources\UserResource\RelationManagers\ReservationsRelationManager;
+use App\Models\Reservation;
 use App\Models\Table as TableModel;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -11,6 +15,8 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
@@ -66,6 +72,7 @@ class TableResource extends Resource
     {
         return $table
             ->paginationPageOptions([25, 50, 100])
+            ->poll('2s')
             ->columns([
                 Tables\Columns\TextColumn::make('label')
                     ->searchable(),
@@ -73,15 +80,27 @@ class TableResource extends Resource
                     ->label('Occupied by')
                     ->default('-')
                     ->description(fn (TableModel $record, $state) => $state != '-' ? 'Until ' . $record->currentReservation?->end_at->format('H:i') : null),
+                TextColumn::make('size')
+                    ->label('Size')
+                    ->getStateUsing(fn (TableModel $record) => $record->dimensions->width . 'x' . $record->dimensions->height),
+
+                TextColumn::make('location')
+                    ->label('Location')
+                    ->getStateUsing(fn (TableModel $record) => $record->dimensions->x . 'x' . $record->dimensions->y),
+
                 Tables\Columns\TextColumn::make('capacity')
                     ->numeric()
                     ->sortable(),
+
+                IconColumn::make('available')
+                    ->label('Available to see')
+                    ->boolean(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -96,7 +115,7 @@ class TableResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ReservationsRelationManager::class
         ];
     }
 
@@ -104,8 +123,7 @@ class TableResource extends Resource
     {
         return [
             'index' => Pages\ListTables::route('/'),
-            'create' => Pages\CreateTable::route('/create'),
-            'edit' => Pages\EditTable::route('/{record}/edit'),
+            'edit' => Pages\EditTable::route('/records/{record}/edit'),
         ];
     }
 
