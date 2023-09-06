@@ -12,5 +12,8 @@ interface InteractiveTable
 
     public function getTableDraggable(Table $table): bool;
 
+    /**
+     * @return array<int|string, bool|string>
+     */
     public function getTableClasses(Table $table): array;
 }
