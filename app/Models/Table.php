@@ -25,6 +25,7 @@ class Table extends Model
 
     protected $casts = [
         'dimensions' => Dimensions::class,
+        'available' => 'boolean',
     ];
 
     public function reservations(): BelongsToMany
