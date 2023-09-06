@@ -51,7 +51,11 @@
     @foreach ($this->tables as $table)
         <div
             id="{{ $table->id }}"
-            style="width: {{ $table->dimensions->width }}px; height: {{ $table->dimensions->height }}px; left: {{ $table->dimensions->x }}px; top: {{ $table->dimensions->y }}px; position: absolute"
+            style="
+                left: {{ $table->dimensions->x }}px;
+                top: {{ $table->dimensions->y }}px;
+                position: absolute;
+            "
             wire:ignore
             x-on:click.prevent="click({{ $table->id }})"
             @class($this->getTableClasses($table))
@@ -64,7 +68,7 @@
             x-on:touchmove.document="event => drag(id, event.touches[0].clientX, event.touches[0].clientY)"
             @endif
         >
-            <livewire:dynamic-component :is="$this->getTableInnerView($table)" :table="$table" />
+            <livewire:dynamic-component :is="$this->getTableInnerView($table)" :table="$table"  />
         </div>
     @endforeach
 
