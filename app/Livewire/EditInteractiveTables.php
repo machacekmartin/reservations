@@ -3,11 +3,9 @@
 namespace App\Livewire;
 
 use App\Contracts\InteractiveTable;
+use App\Filament\Admin\Resources\TableResource;
 use App\Models\Table;
 use Filament\Actions\Action;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 
 class EditInteractiveTables extends InteractiveTables implements InteractiveTable
 {
@@ -51,43 +49,7 @@ class EditInteractiveTables extends InteractiveTables implements InteractiveTabl
                 $record->update($data);
             })
             ->modalWidth('2xl')
-            ->modalHeading(fn (Table $record) => 'Edit table ' . $record->label)
-            ->form([
-                Section::make()
-                    ->columns(6)
-                    ->columnSpanFull()
-                    ->schema([
-                        TextInput::make('label')
-                            ->required()
-                            ->columnSpan(4),
-                        TextInput::make('capacity')
-                            ->required()
-                            ->numeric(),
-                        Toggle::make('available')
-                            ->label('Available')
-                            ->inline(false),
-                    ]),
-                Section::make()
-                    ->columns(4)
-                    ->schema([
-                        TextInput::make('dimensions.width')
-                            ->numeric()
-                            ->minValue(20)
-                            ->required(),
-                        TextInput::make('dimensions.height')
-                            ->numeric()
-                            ->minValue(20)
-                            ->required(),
-                        TextInput::make('dimensions.x')
-                            ->numeric()
-                            ->minValue(20)
-                            ->rules('required')
-                            ->required(),
-                        TextInput::make('dimensions.y')
-                            ->numeric()
-                            ->minValue(20)
-                            ->required(),
-                    ]),
-            ]);
+            ->modalHeading(fn (Table $record) => 'Edit table '. $record->label)
+            ->form(fn($form) => TableResource::form($form));
     }
 }

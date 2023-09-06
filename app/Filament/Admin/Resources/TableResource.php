@@ -5,6 +5,9 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\TableResource\Pages;
 use App\Models\Table as TableModel;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -21,15 +24,41 @@ class TableResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('label')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Toggle::make('available')
-                    ->required()
-                    ->inline(false),
-                Forms\Components\TextInput::make('capacity')
-                    ->required()
-                    ->numeric(),
+                Section::make()
+                    ->columns(6)
+                    ->columnSpanFull()
+                    ->schema([
+                        TextInput::make('label')
+                            ->required()
+                            ->columnSpan(4),
+                        TextInput::make('capacity')
+                            ->required()
+                            ->numeric(),
+                        Toggle::make('available')
+                            ->label('Available')
+                            ->inline(false),
+                    ]),
+                Section::make()
+                    ->columns(4)
+                    ->schema([
+                        TextInput::make('dimensions.width')
+                            ->numeric()
+                            ->minValue(20)
+                            ->required(),
+                        TextInput::make('dimensions.height')
+                            ->numeric()
+                            ->minValue(20)
+                            ->required(),
+                        TextInput::make('dimensions.x')
+                            ->numeric()
+                            ->minValue(20)
+                            ->rules('required')
+                            ->required(),
+                        TextInput::make('dimensions.y')
+                            ->numeric()
+                            ->minValue(20)
+                            ->required(),
+                    ]),
             ]);
     }
 
