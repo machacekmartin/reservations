@@ -49,8 +49,8 @@
             "
             id="{{ $table->id }}"
             class="absolute p-3 font-bold text-white uppercase transition-transform shadow-2xl draggable rounded-xl bg-gradient-to-tr ring ring-white/20 from-slate-500/60 to-green-400/60 hover:scale-105 active:scale-110"
-            {{-- wire:click="open({{ $table->id }})" --}}
-            {{-- wire:ignore --}}
+            {{-- wire:click="open({{ $table->id }})"
+            wire:ignore --}}
             @if($this->mode === 'edit')
             x-data="{ id: 'draggable-{{ $table->id }}' }"
             x-ref="draggable-{{ $table->id }}"

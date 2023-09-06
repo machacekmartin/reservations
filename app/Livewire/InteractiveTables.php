@@ -41,10 +41,14 @@ class InteractiveTables extends Component implements HasForms, HasActions
         return $this->mode;
     }
 
+    /** @phpstan-ignore-next-line */
     private function clickAction(): mixed
     {
+        /** @phpstan-ignore-next-line */
+        $arguments = $this->mountedActionsArguments[0];
+
         return Action::make('hehe')
-            ->record($this->mountedActionsArguments[0]['record'])
+            ->record($arguments['record'])
             ->fillForm(fn ($record) => $record->toArray())
             ->action(function (Table $record, array $data) {
                 $record->dimensions->width = $data['dimensions']['width'];
@@ -64,9 +68,9 @@ class InteractiveTables extends Component implements HasForms, HasActions
             ]);
     }
 
-    public function open($id)
+    public function open(Table $table): void
     {
-        $this->mountAction('clickAction', ['record' => Table::find($id)]);
+        $this->mountAction('clickAction', ['record' => $table]);
     }
 
     public function savePosition(Table $table, int $x, int $y): void
