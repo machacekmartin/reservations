@@ -8,7 +8,6 @@ use Filament\Actions\Action;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Illuminate\View\View;
 
 class EditInteractiveTables extends InteractiveTables implements InteractiveTable
 {
