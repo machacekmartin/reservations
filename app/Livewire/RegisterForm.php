@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Actions\Action;
@@ -73,6 +74,8 @@ class RegisterForm extends Component implements HasForms
             'email' => $this->email,
             'password' => $this->password,
         ]);
+
+        $user->assignRole('user');
 
         auth()->login($user);
 
