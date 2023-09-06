@@ -20,8 +20,7 @@ class Table extends Model
         'label',
         'available',
         'capacity',
-        'location',
-        'size',
+        'dimensions',
     ];
 
     protected $casts = [
