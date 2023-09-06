@@ -3,20 +3,13 @@
 namespace App\Livewire;
 
 use App\Models\Table;
-use Filament\Actions\Concerns\InteractsWithActions;
-use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-abstract class InteractiveTables extends Component implements HasActions, HasForms
+abstract class InteractiveTables extends Component
 {
-    use InteractsWithActions;
-    use InteractsWithForms;
-
     public function render(): View
     {
         return view('livewire.interactive-tables');

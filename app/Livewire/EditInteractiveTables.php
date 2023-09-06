@@ -6,9 +6,16 @@ use App\Contracts\InteractiveTable;
 use App\Filament\Admin\Resources\TableResource;
 use App\Models\Table;
 use Filament\Actions\Action;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 
-class EditInteractiveTables extends InteractiveTables implements InteractiveTable
+class EditInteractiveTables extends InteractiveTables implements InteractiveTable, HasActions, HasForms
 {
+    use InteractsWithActions;
+    use InteractsWithForms;
+
     public function onTableClick(Table $table): void
     {
         $this->mountAction('clickAction', ['record' => $table]);
