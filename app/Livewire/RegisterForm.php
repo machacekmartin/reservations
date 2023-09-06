@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Enums\UserRole;
 use App\Models\User;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Actions\Action;
