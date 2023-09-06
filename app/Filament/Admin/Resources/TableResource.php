@@ -2,13 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Data\Dimensions;
 use App\Filament\Admin\Resources\TableResource\Pages;
 use App\Filament\Admin\Resources\UserResource\RelationManagers\ReservationsRelationManager;
-use App\Models\Reservation;
 use App\Models\Table as TableModel;
-use Filament\Actions\Action;
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -115,7 +111,7 @@ class TableResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ReservationsRelationManager::class
+            ReservationsRelationManager::class,
         ];
     }
 

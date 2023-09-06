@@ -48,6 +48,6 @@ class EditInteractiveTables extends InteractiveTables implements InteractiveTabl
             ->action(function (Table $record, array $data) {
                 $record->update($data);
             })
-            ->form(fn($form) => TableResource::form($form));
+            ->form(fn ($form) => TableResource::form($form));
     }
 }
