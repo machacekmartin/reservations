@@ -2,14 +2,16 @@
 
 namespace App\Livewire;
 
-use App\Contracts\InteractiveTableEvents;
+use App\Contracts\InteractiveTable;
 use App\Models\Table;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 
-class EditInteractiveTables extends InteractiveTables implements InteractiveTableEvents
+class EditInteractiveTables extends InteractiveTables implements InteractiveTable
 {
-    public function getAllowDrag(Table $table): bool
+    public function getTableDraggable(Table $table): bool
     {
         return true;
     }
@@ -17,8 +19,9 @@ class EditInteractiveTables extends InteractiveTables implements InteractiveTabl
     public function getTableClasses(Table $table): array
     {
         return [
-            'absolute p-3 font-bold text-white uppercase transition-transform shadow-2xl  rounded-xl ring ring-white/20 ' => true,
-            'bg-gradient-to-tr from-slate-500/60 to-green-400/60 hover:scale-105 active:scale-110' => true,
+            'p-3 font-bold text-white uppercase transition-transform shadow-2xl rounded-xl ring ring-white/20 hover:scale-105 active:scale-110',
+            'bg-gradient-to-tr from-blue-500/60 to-green-400/60' => $table->available,
+            'bg-gradient-to-tr from-gray-200/60 to-gray-400' => ! $table->available,
         ];
     }
 
@@ -44,20 +47,46 @@ class EditInteractiveTables extends InteractiveTables implements InteractiveTabl
             ->record($arguments['record'])
             ->fillForm(fn ($record) => $record->toArray())
             ->action(function (Table $record, array $data) {
-                $record->dimensions->width = $data['dimensions']['width'];
-                $record->dimensions->height = $data['dimensions']['height'];
-
-                $record->save();
+                $record->update($data);
             })
+            ->modalWidth('2xl')
+            ->modalHeading(fn (Table $record) => 'Edit table '. $record->label)
             ->form([
-                TextInput::make('label')
-                    ->required(),
-                TextInput::make('dimensions.width')
-                    ->numeric()
-                    ->required(),
-                TextInput::make('dimensions.height')
-                    ->numeric()
-                    ->required(),
+                Section::make()
+                    ->columns(6)
+                    ->columnSpanFull()
+                    ->schema([
+                        TextInput::make('label')
+                            ->required()
+                            ->columnSpan(4),
+                        TextInput::make('capacity')
+                            ->required()
+                            ->numeric(),
+                        Toggle::make('available')
+                            ->label('Available')
+                            ->inline(false),
+                    ]),
+                Section::make()
+                    ->columns(4)
+                    ->schema([
+                        TextInput::make('dimensions.width')
+                            ->numeric()
+                            ->minValue(20)
+                            ->required(),
+                        TextInput::make('dimensions.height')
+                            ->numeric()
+                            ->minValue(20)
+                            ->required(),
+                        TextInput::make('dimensions.x')
+                            ->numeric()
+                            ->minValue(20)
+                            ->rules('required')
+                            ->required(),
+                        TextInput::make('dimensions.y')
+                            ->numeric()
+                            ->minValue(20)
+                            ->required(),
+                    ]),
             ]);
     }
 }

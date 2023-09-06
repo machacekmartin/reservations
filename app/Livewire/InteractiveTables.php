@@ -12,12 +12,10 @@ use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-class InteractiveTables extends Component implements HasActions, HasForms
+abstract class InteractiveTables extends Component implements HasActions, HasForms
 {
     use InteractsWithActions;
     use InteractsWithForms;
-
-    private bool $allowDrag = false;
 
     public function render(): View
     {
@@ -31,20 +29,5 @@ class InteractiveTables extends Component implements HasActions, HasForms
     public function tables(): Collection
     {
         return Table::all();
-    }
-
-    public function getAllowDrag(Table $table): bool
-    {
-        return $this->allowDrag;
-    }
-
-    /**
-     * @return array<string, bool>
-     */
-    public function getTableClasses(Table $table): array
-    {
-        return [
-            'absolute p-3 font-bold text-white uppercase transition-transform shadow-2xl draggable rounded-xl ring ring-white/20 ' => true,
-        ];
     }
 }
