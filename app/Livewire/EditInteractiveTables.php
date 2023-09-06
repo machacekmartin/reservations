@@ -50,7 +50,7 @@ class EditInteractiveTables extends InteractiveTables implements InteractiveTabl
                 $record->update($data);
             })
             ->modalWidth('2xl')
-            ->modalHeading(fn (Table $record) => 'Edit table '. $record->label)
+            ->modalHeading(fn (Table $record) => 'Edit table ' . $record->label)
             ->form([
                 Section::make()
                     ->columns(6)

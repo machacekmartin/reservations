@@ -55,7 +55,7 @@
             wire:ignore
             x-on:click.prevent="click({{ $table->id }})"
             @class($this->getTableClasses($table))
-            @if($this->getTableDraggable($table))
+            @if ($this->getTableDraggable($table))
             x-data="{ id: 'draggable-{{ $table->id }}' }"
             x-ref="draggable-{{ $table->id }}"
             x-on:mousedown.self.prevent="vent => press(id, event.clientX, event.clientY)"
