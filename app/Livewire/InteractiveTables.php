@@ -19,7 +19,7 @@ class InteractiveTables extends Component implements HasActions, HasForms
     use InteractsWithActions;
     use InteractsWithForms;
 
-    private string $mode = 'edit';
+    private bool $allowDrag = false;
 
     public function render(): View
     {
@@ -35,49 +35,18 @@ class InteractiveTables extends Component implements HasActions, HasForms
         return Table::all();
     }
 
-    #[Computed()]
-    public function mode(): string
+    public function getAllowDrag(Table $table): bool
     {
-        return $this->mode;
+        return $this->allowDrag;
     }
 
-    public function open(Table $table): void
+    /**
+     * @return array<string, bool>
+     */
+    public function getTableClasses(Table $table): array
     {
-        $this->mountAction('clickAction', ['record' => $table]);
-    }
-
-    public function savePosition(Table $table, int $x, int $y): void
-    {
-        $table->dimensions->x = $x;
-        $table->dimensions->y = $y;
-
-        $table->save();
-    }
-
-    /** @phpstan-ignore-next-line */
-    private function clickAction(): mixed
-    {
-        /** @phpstan-ignore-next-line */
-        $arguments = $this->mountedActionsArguments[0];
-
-        return Action::make('hehe')
-            ->record($arguments['record'])
-            ->fillForm(fn ($record) => $record->toArray())
-            ->action(function (Table $record, array $data) {
-                $record->dimensions->width = $data['dimensions']['width'];
-                $record->dimensions->height = $data['dimensions']['height'];
-
-                $record->save();
-            })
-            ->form([
-                TextInput::make('label')
-                    ->required(),
-                TextInput::make('dimensions.width')
-                    ->numeric()
-                    ->required(),
-                TextInput::make('dimensions.height')
-                    ->numeric()
-                    ->required(),
-            ]);
+        return [
+            'absolute p-3 font-bold text-white uppercase transition-transform shadow-2xl draggable rounded-xl ring ring-white/20 ' => true,
+        ];
     }
 }
