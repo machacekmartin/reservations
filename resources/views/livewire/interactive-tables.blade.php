@@ -58,7 +58,7 @@
             @if ($this->getTableDraggable($table))
             x-data="{ id: 'draggable-{{ $table->id }}' }"
             x-ref="draggable-{{ $table->id }}"
-            x-on:mousedown.prevent="vent => press(id, event.clientX, event.clientY)"
+            x-on:mousedown.prevent="event => press(id, event.clientX, event.clientY)"
             x-on:touchstart.passive="event => press(id, event.touches[0].clientX, event.touches[0].clientY)"
             x-on:mousemove.prevent.document="event => drag(id, event.clientX, event.clientY)"
             x-on:touchmove.document="event => drag(id, event.touches[0].clientX, event.touches[0].clientY)"
