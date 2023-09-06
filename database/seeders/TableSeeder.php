@@ -10,7 +10,7 @@ class TableSeeder extends Seeder
     public function run(): void
     {
         Table::factory()
-            ->count(20)
+            ->count(6)
             ->create();
     }
 }
