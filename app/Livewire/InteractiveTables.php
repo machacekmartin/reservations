@@ -14,7 +14,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-class InteractiveTables extends Component implements HasForms, HasActions
+class InteractiveTables extends Component implements HasActions, HasForms
 {
     use InteractsWithActions;
     use InteractsWithForms;
@@ -39,6 +39,19 @@ class InteractiveTables extends Component implements HasForms, HasActions
     public function mode(): string
     {
         return $this->mode;
+    }
+
+    public function open(Table $table): void
+    {
+        $this->mountAction('clickAction', ['record' => $table]);
+    }
+
+    public function savePosition(Table $table, int $x, int $y): void
+    {
+        $table->dimensions->x = $x;
+        $table->dimensions->y = $y;
+
+        $table->save();
     }
 
     /** @phpstan-ignore-next-line */
@@ -66,18 +79,5 @@ class InteractiveTables extends Component implements HasForms, HasActions
                     ->numeric()
                     ->required(),
             ]);
-    }
-
-    public function open(Table $table): void
-    {
-        $this->mountAction('clickAction', ['record' => $table]);
-    }
-
-    public function savePosition(Table $table, int $x, int $y): void
-    {
-        $table->dimensions->x = $x;
-        $table->dimensions->y = $y;
-
-        $table->save();
     }
 }
