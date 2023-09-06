@@ -1,15 +1,20 @@
 <div x-data="{
     draggingId: null,
+    dragged: false,
     start: { x: 0, y: 0 },
     current: { x: 0, y: 0 },
     press(id, x, y) {
+        this.dragged = false;
+
         this.draggingId = id;
-        {{-- document.documentElement.style.overflow = 'hidden' --}}
         this.current.x = x;
         this.current.y = y;
+
+        this.$refs[id].offsetTop - this.start.y;
     },
     drag(id, x, y) {
         if (this.draggingId !== id) return;
+        this.dragged = true;
 
         this.start.x = this.current.x - x;
         this.start.y = this.current.y - y;
@@ -34,27 +39,26 @@
 
         this.draggingId = null
 
-        this.$wire.savePosition(id, left, top)
+        this.$wire.onTableDragEnd(id, left, top)
     },
+    click(id) {
+        if (this.dragged) return;
+        $wire.onTableClick(id)
+    }
 }"
     x-on:mouseup.document.prevent="unpress"
     x-on:touchend.document="unpress">
     @foreach ($this->tables as $table)
         <div
-            style="
-                width: {{ $table->dimensions->width }}px;
-                height: {{ $table->dimensions->height }}px;
-                left: {{ $table->dimensions->x }}px;
-                top: {{ $table->dimensions->y }}px;
-            "
             id="{{ $table->id }}"
-            class="absolute p-3 font-bold text-white uppercase transition-transform shadow-2xl draggable rounded-xl bg-gradient-to-tr ring ring-white/20 from-slate-500/60 to-green-400/60 hover:scale-105 active:scale-110"
-            {{-- wire:click="open({{ $table->id }})"
-            wire:ignore --}}
-            @if ($this->mode === 'edit')
+            style="width: {{ $table->dimensions->width }}px; height: {{ $table->dimensions->height }}px; left: {{ $table->dimensions->x }}px; top: {{ $table->dimensions->y }}px"
+            wire:ignore
+            x-on:click.prevent="click({{ $table->id }})"
+            @class($this->getTableClasses($table))
+            @if($this->getAllowDrag($table))
             x-data="{ id: 'draggable-{{ $table->id }}' }"
             x-ref="draggable-{{ $table->id }}"
-            x-on:mousedown.self.prevent="event => press(id, event.clientX, event.clientY)"
+            x-on:mousedown.self.prevent="vent => press(id, event.clientX, event.clientY)"
             x-on:touchstart.passive="event => press(id, event.touches[0].clientX, event.touches[0].clientY)"
             x-on:mousemove.prevent.document="event => drag(id, event.clientX, event.clientY)"
             x-on:touchmove.document="event => drag(id, event.touches[0].clientX, event.touches[0].clientY)"
