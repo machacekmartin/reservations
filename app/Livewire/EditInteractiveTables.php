@@ -48,8 +48,6 @@ class EditInteractiveTables extends InteractiveTables implements InteractiveTabl
             ->action(function (Table $record, array $data) {
                 $record->update($data);
             })
-            ->modalWidth('2xl')
-            ->modalHeading(fn (Table $record) => 'Edit table '. $record->label)
             ->form(fn($form) => TableResource::form($form));
     }
 }
