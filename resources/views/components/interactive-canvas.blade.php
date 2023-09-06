@@ -1,4 +1,3 @@
-
 <div x-data="{
     dragging: false,
     start: { x: 0, y: 0 },
