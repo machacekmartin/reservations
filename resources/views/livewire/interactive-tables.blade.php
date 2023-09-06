@@ -51,11 +51,11 @@
     @foreach ($this->tables as $table)
         <div
             id="{{ $table->id }}"
-            style="width: {{ $table->dimensions->width }}px; height: {{ $table->dimensions->height }}px; left: {{ $table->dimensions->x }}px; top: {{ $table->dimensions->y }}px"
+            style="width: {{ $table->dimensions->width }}px; height: {{ $table->dimensions->height }}px; left: {{ $table->dimensions->x }}px; top: {{ $table->dimensions->y }}px; position: absolute"
             wire:ignore
             x-on:click.prevent="click({{ $table->id }})"
             @class($this->getTableClasses($table))
-            @if ($this->getAllowDrag($table))
+            @if($this->getTableDraggable($table))
             x-data="{ id: 'draggable-{{ $table->id }}' }"
             x-ref="draggable-{{ $table->id }}"
             x-on:mousedown.self.prevent="vent => press(id, event.clientX, event.clientY)"
