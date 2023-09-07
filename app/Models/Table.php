@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * @property-read Reservation|null $currentReservation
  * @property-read Dimensions $dimensions
+ * @method bool isReservedAt(Carbon $date)
  */
 class Table extends Model
 {
@@ -42,5 +43,14 @@ class Table extends Model
                 ->where('end_at', '>=', now())
                 ->first()
         );
+    }
+
+    public function isReservedAt(Carbon $date): bool
+    {
+        return $this->reservations()
+            ->where('canceled_at', null)
+            ->where('start_at', '<=', $date)
+            ->where('end_at', '>=', $date)
+            ->exists();
     }
 }
