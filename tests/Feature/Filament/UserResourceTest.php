@@ -49,10 +49,12 @@ it('sees records in index page', function () {
         ->assertCanSeeTableRecords($users);
 });
 
-it('sees edit form in edit page', function () {
-    Role::create(['name' => 'admin']);
+it('edits record with form on edit page', function () {
+    $roleUser = Role::create(['name' => 'user']);
+    $roleAdmin = Role::create(['name' => 'admin']);
 
-    $user = User::factory()->create();
+    $user = User::factory()->as('user')->create();
+    $now = now();
 
     livewire(EditUser::class, ['record' => $user->id ])
         ->assertFormFieldExists('avatar')
@@ -61,8 +63,25 @@ it('sees edit form in edit page', function () {
             'email' => $user->email,
             'phone' => $user->phone,
             'email_verified_at' => $user->email_verified_at,
-            'roles' => $user->roles->pluck('name')->toArray(),
-        ]);
+            'roles' => [$roleUser->id],
+        ])
+        ->fillForm([
+            'name' => 'John Doe',
+            'email' => 'test-email@email.test',
+            'phone' => '+420777555333',
+            'email_verified_at' => $now,
+            'roles' => [$roleAdmin->id],
+        ])
+        ->call('save')
+        ->assertHasNoFormErrors();
+
+    expect($user->fresh())
+        ->name->toBe('John Doe')
+        ->email->toBe('test-email@email.test')
+        ->phone->toBe('+420777555333')
+        ->email_verified_at->toDateTimeString()->toBe($now->toDateTimeString())
+        ->roles->toHaveCount(1)
+        ->roles->first()->name->toBe('admin');
 });
 
 it('sees create form in create page', function () {
