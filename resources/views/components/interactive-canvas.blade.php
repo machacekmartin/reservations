@@ -25,7 +25,7 @@
     }
 }">
     <div
-        class="relative  border border-gray-200 shadow rounded-2xl bg-slate-800 cursor-grab active:cursor-grabbing overflow-hidden h-[800px] min-w-[200px]"
+        class="relative  border border-gray-200 shadow rounded-2xl bg-slate-800 cursor-grab active:cursor-grabbing overflow-hidden h-[550px] min-w-[200px]"
         x-ref="scrollable"
         x-on:mousedown.self="event => press(event.clientX, event.clientY)"
         x-on:touchstart.self.passive="event => press(event.touches[0].clientX, event.touches[0].clientY)"
