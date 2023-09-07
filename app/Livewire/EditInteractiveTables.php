@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Contracts\HasInteractiveTables;
 use App\Contracts\InteractiveTable;
 use App\Filament\Admin\Resources\TableResource;
 use App\Models\Table;
@@ -11,7 +12,7 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 
-class EditInteractiveTables extends InteractiveTables implements HasActions, HasForms, InteractiveTable
+class EditInteractiveTables extends InteractiveTables implements HasActions, HasForms
 {
     use InteractsWithActions;
     use InteractsWithForms;
@@ -42,6 +43,13 @@ class EditInteractiveTables extends InteractiveTables implements HasActions, Has
     public function getTableInnerView(Table $table): string
     {
         return 'table-inner';
+    }
+
+    public function getTableInnerViewData(Table $table): array
+    {
+        return [
+            'table' => $table,
+        ];
     }
 
     public function clickAction(): mixed

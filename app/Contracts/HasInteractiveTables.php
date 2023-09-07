@@ -4,7 +4,7 @@ namespace App\Contracts;
 
 use App\Models\Table;
 
-interface InteractiveTable
+interface HasInteractiveTables
 {
     public function onTableClick(Table $table): void;
 
@@ -16,4 +16,11 @@ interface InteractiveTable
      * @return array<int|string, bool|string>
      */
     public function getTableClasses(Table $table): array;
+
+    public function getTableInnerView(Table $table): string;
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getTableInnerViewData(Table $table): array;
 }

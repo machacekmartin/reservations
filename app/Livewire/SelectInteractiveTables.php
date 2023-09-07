@@ -9,7 +9,7 @@ use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 
-class SelectInteractiveTables extends InteractiveTables implements HasActions, HasForms, InteractiveTable
+class SelectInteractiveTables extends InteractiveTables implements HasActions, HasForms
 {
     use InteractsWithActions;
     use InteractsWithForms;
@@ -51,9 +51,6 @@ class SelectInteractiveTables extends InteractiveTables implements HasActions, H
         return 'table-inner-select';
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function getTableInnerViewData(Table $table): array
     {
         return [
