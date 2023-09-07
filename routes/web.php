@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LogoutUserController;
+use App\View\Components\Pages\CreateReservationPage;
 use App\View\Components\Pages\EditUserPage;
 use App\View\Components\Pages\LoginPage;
 use App\View\Components\Pages\RegisterPage;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 // Routes that require user to be logged in
 Route::middleware('auth')->group(function () {
     Route::get('/', fn () => Blade::renderComponent(new ReservationsPage))->name('reservations');
+    Route::get('create-reservation', fn () => Blade::renderComponent(new CreateReservationPage))->name('create-reservation');
     Route::get('edit-account', fn () => Blade::renderComponent(new EditUserPage))->name('edit-account');
     Route::post('logout', LogoutUserController::class)->name('logout');
 });
