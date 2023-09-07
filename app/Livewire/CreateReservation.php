@@ -4,11 +4,8 @@ namespace App\Livewire;
 
 use App\Models\Table;
 use Carbon\CarbonInterval;
-use Collator;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -37,7 +34,7 @@ class CreateReservation extends Component implements HasForms
     }
 
     /**
-     * @param array<int> $tables
+     * @param  array<int>  $tables
      */
     #[On('tables-selected')]
     public function updateSelectedTables(array $tables): void
@@ -62,8 +59,8 @@ class CreateReservation extends Component implements HasForms
                             ->numeric()
                             ->minValue(1)
                             ->required()
-                            ->prefixIcon('heroicon-o-user')
-                    ])
+                            ->prefixIcon('heroicon-o-user'),
+                    ]),
             ]);
     }
 
@@ -80,8 +77,7 @@ class CreateReservation extends Component implements HasForms
                 $start = $interval->toDate();
 
                 $reserved = collect($this->selectedTables)
-                    ->contains(fn ($tableId) =>
-                        Table::query()->findOrFail($tableId)->isReservedAt(Carbon::instance($start))
+                    ->contains(fn ($tableId) => Table::query()->findOrFail($tableId)->isReservedAt(Carbon::instance($start))
                     );
 
                 return [

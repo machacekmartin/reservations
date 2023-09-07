@@ -8,11 +8,6 @@ use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\View\ComponentAttributeBag;
-use Livewire\Attributes\Computed;
-use Livewire\Attributes\Reactive;
-use Livewire\Livewire;
 
 class SelectInteractiveTables extends InteractiveTables implements HasActions, HasForms, InteractiveTable
 {
@@ -26,8 +21,9 @@ class SelectInteractiveTables extends InteractiveTables implements HasActions, H
 
     public function onTableClick(Table $table): void
     {
-        if (! $table->available) return;
-
+        if (! $table->available) {
+            return;
+        }
 
         $key = array_search($table->id, $this->selectedTables);
         $key !== false ? array_splice($this->selectedTables, (int) $key, 1) : $this->selectedTables[] = $table->id;
