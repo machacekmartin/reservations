@@ -36,7 +36,6 @@ class RegisterForm extends Component implements HasForms
                         ->required(),
                     TextInput::make('name')
                         ->placeholder('Walter White')
-                        ->alphaNum()
                         ->minLength(4)
                         ->maxLength(50)
                         ->required(),
