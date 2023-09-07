@@ -16,7 +16,7 @@ it('edits user with given details', function () {
         ->fillForm([
             'email' => 'disabled@email.test',
             'name' => 'Test Name',
-            'phone' => '+420777555666'
+            'phone' => '+420777555666',
         ])
         ->call('submit')
         ->assertHasNoFormErrors();
@@ -38,7 +38,7 @@ it('cancels before saving edit', function () {
         ->fillForm([
             'email' => 'disabled@email.test',
             'name' => 'Test Name',
-            'phone' => '+420777555666'
+            'phone' => '+420777555666',
         ])
         ->call('cancel')
         ->assertFormSet([

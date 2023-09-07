@@ -2,7 +2,6 @@
 
 use App\Livewire\LoginForm;
 use App\Models\User;
-use Illuminate\Validation\ValidationException;
 
 use function Pest\Laravel\assertAuthenticatedAs;
 use function Pest\Laravel\assertGuest;
@@ -59,7 +58,7 @@ it('does not log user in because the combination does not exist', function () {
         ])
         ->call('login')
         ->assertHasFormErrors([
-            'email'
+            'email',
         ]);
 
     assertGuest();
