@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Contracts\InteractiveTable;
 use App\Models\Table;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;

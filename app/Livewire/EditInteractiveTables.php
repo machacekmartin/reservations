@@ -2,8 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Contracts\HasInteractiveTables;
-use App\Contracts\InteractiveTable;
 use App\Filament\Admin\Resources\TableResource;
 use App\Models\Table;
 use Filament\Actions\Action;
