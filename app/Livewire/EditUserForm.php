@@ -48,7 +48,6 @@ class EditUserForm extends Component implements HasForms
 
                 TextInput::make('name')
                     ->required()
-                    ->alphaNum()
                     ->minLength(4)
                     ->maxLength(50),
 
@@ -72,7 +71,7 @@ class EditUserForm extends Component implements HasForms
             ->model($this->user);
     }
 
-    private function submit(): void
+    public function submit(): void
     {
         $this->form->validate();
 
@@ -83,7 +82,7 @@ class EditUserForm extends Component implements HasForms
             ->send();
     }
 
-    private function cancel(): void
+    public function cancel(): void
     {
         $this->form->fill($this->user->toArray());
     }
