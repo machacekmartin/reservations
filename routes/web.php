@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 // Routes that require user to be logged in
 Route::middleware('auth')->group(function () {
     Route::get('/', fn () => Blade::renderComponent(new ReservationsPage))->name('reservations');
-    Route::get('account', fn () => Blade::renderComponent(new EditUserPage))->name('edit-account');
+    Route::get('edit-account', fn () => Blade::renderComponent(new EditUserPage))->name('edit-account');
     Route::post('logout', LogoutUserController::class)->name('logout');
 });
 
