@@ -3,16 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Table;
-use Filament\Actions\Concerns\InteractsWithActions;
-use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 
-class SelectInteractiveTables extends InteractiveTables implements HasActions, HasForms
+class SelectInteractiveTables extends InteractiveTables
 {
-    use InteractsWithActions;
-    use InteractsWithForms;
-
     /**
      * @var array<int>
      */
