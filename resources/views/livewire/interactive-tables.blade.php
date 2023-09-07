@@ -68,7 +68,7 @@
             x-on:touchmove.document="event => drag(id, event.touches[0].clientX, event.touches[0].clientY)"
             @endif
         >
-            <livewire:dynamic-component :is="$this->getTableInnerView($table)" :table="$table"  />
+            @livewire('table-inner-select', $this->getTableInnerViewData($table), key($table->id))
         </div>
     @endforeach
 
