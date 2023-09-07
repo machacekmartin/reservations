@@ -5,7 +5,7 @@ parameters:
     paths:
         - app
         - database
-    level: 9
+    level: 8
     ignoreErrors:
     excludePaths:
         - database/migrations
