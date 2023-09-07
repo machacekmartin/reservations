@@ -42,7 +42,7 @@ it('edits record with form on edit page', function () {
 
     $table = Table::factory()->create();
 
-    livewire(EditTable::class, ['record' => $table->id ])
+    livewire(EditTable::class, ['record' => $table->id])
         ->assertFormSet([
             'label' => $table->label,
             'capacity' => $table->capacity,
@@ -79,7 +79,7 @@ it('sees edit form in edit page', function () {
 
     $table = Table::factory()->create();
 
-    livewire(EditTable::class, ['record' => $table->id ])
+    livewire(EditTable::class, ['record' => $table->id])
         ->assertFormSet([
             'label' => $table->label,
             'capacity' => $table->capacity,

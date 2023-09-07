@@ -5,12 +5,6 @@ use App\Filament\Admin\Resources\ReservationResource;
 use App\Filament\Admin\Resources\ReservationResource\Pages\CreateReservation;
 use App\Filament\Admin\Resources\ReservationResource\Pages\EditReservation;
 use App\Filament\Admin\Resources\ReservationResource\Pages\ListReservations;
-use App\Filament\Admin\Resources\TableResource;
-use App\Filament\Admin\Resources\TableResource\Pages\EditTable;
-use App\Filament\Admin\Resources\TableResource\Pages\ListTables;
-use App\Filament\Admin\Resources\UserResource;
-use App\Filament\Admin\Resources\UserResource\Pages\EditUser;
-use App\Filament\Admin\Resources\UserResource\Pages\ListUsers;
 use App\Models\Reservation;
 use App\Models\Table;
 use App\Models\User;
@@ -61,7 +55,7 @@ it('edits record with form on edit page', function () {
     $reservation = Reservation::factory()->create(['created_at' => '2021-01-01 00:00']);
     $tables = Table::factory(3)->create();
 
-    livewire(EditReservation::class, ['record' => $reservation->id ])
+    livewire(EditReservation::class, ['record' => $reservation->id])
         ->assertFormFieldExists('tables')
         ->assertFormSet([
             'user_id' => $reservation->user->id,
@@ -109,7 +103,7 @@ it('edits record with form on edit page', function () {
 it('sees create form in create page', function () {
     Role::create(['name' => 'admin']);
 
-    livewire(CreateReservation::class,)
+    livewire(CreateReservation::class)
         ->assertFormFieldExists('user_id')
         ->assertFormFieldExists('guest_count')
         ->assertFormFieldExists('note')

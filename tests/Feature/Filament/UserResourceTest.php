@@ -1,13 +1,9 @@
 <?php
 
-use App\Filament\Admin\Resources\TableResource;
-use App\Filament\Admin\Resources\TableResource\Pages\EditTable;
-use App\Filament\Admin\Resources\TableResource\Pages\ListTables;
 use App\Filament\Admin\Resources\UserResource;
 use App\Filament\Admin\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Admin\Resources\UserResource\Pages\EditUser;
 use App\Filament\Admin\Resources\UserResource\Pages\ListUsers;
-use App\Models\Table;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 
@@ -56,7 +52,7 @@ it('edits record with form on edit page', function () {
     $user = User::factory()->as('user')->create();
     $now = now();
 
-    livewire(EditUser::class, ['record' => $user->id ])
+    livewire(EditUser::class, ['record' => $user->id])
         ->assertFormFieldExists('avatar')
         ->assertFormSet([
             'name' => $user->name,
