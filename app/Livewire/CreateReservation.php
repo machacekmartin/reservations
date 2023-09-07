@@ -92,49 +92,48 @@ class CreateReservation extends Component implements HasForms
                             ->disabled(fn (Get $get) => $get('start_at') == null)
                             ->reactive()
                             ->prefixIcon('heroicon-o-clock')
-                            ->rules([fn (Get $get) => $this->getEndAtRule($get)])
+                            ->rules([fn (Get $get) => $this->getEndAtRule($get)]),
                     ]),
-                    Section::make()
-                        ->columns(2)
-                        ->schema([
-                            Select::make('remind_at')
-                                ->label('Remind me at')
-                                ->default(0)
-                                ->options([
-                                    0 => "Don't remind me",
-                                    15 => '15 minutes before reservation',
-                                    30 => '30 minutes before reservation',
-                                    60 => '1 hour before reservation',
-                                    120 => '2 hours before reservation',
-                                ])
-                                ->in([0, 15, 30, 60, 120])
-                                ->dehydrateStateUsing(fn (int $state, Get $get) =>
-                                    Carbon::parse($get('start_at'))->addMinutes($state)->toDateTimeString()
-                                ),
+                Section::make()
+                    ->columns(2)
+                    ->schema([
+                        Select::make('remind_at')
+                            ->label('Remind me at')
+                            ->default(0)
+                            ->options([
+                                0 => "Don't remind me",
+                                15 => '15 minutes before reservation',
+                                30 => '30 minutes before reservation',
+                                60 => '1 hour before reservation',
+                                120 => '2 hours before reservation',
+                            ])
+                            ->in([0, 15, 30, 60, 120])
+                            ->dehydrateStateUsing(fn (int $state, Get $get) => Carbon::parse($get('start_at'))->addMinutes($state)->toDateTimeString()
+                            ),
 
-                            TextInput::make('guest_count')
-                                ->label('Hwo many people will be coming')
-                                ->required()
-                                ->numeric()
-                                ->minValue(1)
-                                ->default(1)
-                                ->maxValue(20)
-                                ->prefixIcon('heroicon-o-user'),
+                        TextInput::make('guest_count')
+                            ->label('Hwo many people will be coming')
+                            ->required()
+                            ->numeric()
+                            ->minValue(1)
+                            ->default(1)
+                            ->maxValue(20)
+                            ->prefixIcon('heroicon-o-user'),
 
-                            Textarea::make('note')
-                                ->label('Note')
-                                ->placeholder('Anything else we should know?')
-                                ->rows(3)
-                                ->columnSpanFull()
-                                ->maxLength(50)
+                        Textarea::make('note')
+                            ->label('Note')
+                            ->placeholder('Anything else we should know?')
+                            ->rows(3)
+                            ->columnSpanFull()
+                            ->maxLength(50),
                     ]),
-                    Actions::make([
-                        Action::make('save')
-                            ->label('Create reservation')
-                            ->size('xl')
-                            ->icon('heroicon-o-check')
-                            ->action(fn () => $this->submit())
-                    ])
+                Actions::make([
+                    Action::make('save')
+                        ->label('Create reservation')
+                        ->size('xl')
+                        ->icon('heroicon-o-check')
+                        ->action(fn () => $this->submit()),
+                ]),
             ])->statePath('data');
     }
 
@@ -151,7 +150,7 @@ class CreateReservation extends Component implements HasForms
 
         $reservation->tables()->attach($tables);
 
-        Notification::make()->success()->title('Reservation for '. $reservation->start_at->format('H:i') . ' created')->send();
+        Notification::make()->success()->title('Reservation for ' . $reservation->start_at->format('H:i') . ' created')->send();
         redirect()->route('reservations');
     }
 
@@ -165,7 +164,9 @@ class CreateReservation extends Component implements HasForms
 
     private function isEndOptionDisabled(?string $start, string $end): bool
     {
-        if ($start >= $end) return true;
+        if ($start >= $end) {
+            return true;
+        }
 
         return collect($this->selectedTables)
             ->contains(function ($tableId) use ($start, $end) {
@@ -180,22 +181,25 @@ class CreateReservation extends Component implements HasForms
             $this->data['date'] . ' 20:00'   /** @phpstan-ignore-line */
         )->toArray();
 
-        return collect($intervals)->mapWithKeys(fn ($item) =>
-            [$item->toDateTimeString() => $item->format('H:i')]
+        return collect($intervals)->mapWithKeys(fn ($item) => [$item->toDateTimeString() => $item->format('H:i')]
         );
     }
 
     private function getEndAtRule(Get $get): Closure
     {
         return function ($attribute, $value, Closure $fail) use ($get) {
-            if ($this->isEndOptionDisabled($get('start_at'), $value)) $fail('The :attribute is invalid.');
+            if ($this->isEndOptionDisabled($get('start_at'), $value)) {
+                $fail('The :attribute is invalid.');
+            }
         };
     }
 
     private function getStartAtRule(): Closure
     {
         return function ($attribute, $value, Closure $fail) {
-            if ($this->isStartOptionDisabled($value)) $fail('The :attribute is invalid.');
+            if ($this->isStartOptionDisabled($value)) {
+                $fail('The :attribute is invalid.');
+            }
         };
     }
 }
