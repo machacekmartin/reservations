@@ -59,5 +59,8 @@ There are 3 ways you can manipulate interactive tables. The styling might not be
 - `Second, in the /create-reservation page` - This is a selector of tables meant to be used by normal users. Select a table or two, this will reflect on the available time options (certain time options wont be available where there already is a reservation for that time)
 - `Last, in the /admin/tables page` - This is a place where you can move the tables and is meant to be used by admins or people who setup the restaurant layout. Create new ones, edit them, etc etc (with live polling btw)
 
+## Admin panel
+Admin panel offers a group of pages dedicated to manual manipulation of DB records.
+These manipulations are not always constained to classic user's rules (f.e admin can create overlapping reservations etc..), so keep that in mind.
 
 
