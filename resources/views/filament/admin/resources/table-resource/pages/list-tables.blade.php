@@ -2,7 +2,7 @@
     {{ $this->table }}
 
     <x-interactive-canvas>
-        @if(\App\Models\Table::query()->count() !== 0)
+        @if (\App\Models\Table::query()->count() !== 0)
             <livewire:interactive.edit-tables />
         @endif
     </x-interactive-canvas>

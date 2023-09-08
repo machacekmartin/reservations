@@ -23,7 +23,7 @@
     }
 }">
     <div class="h-[650px] min-w-[200px] border-gray-200 border dark:border-gray-800 rounded-2xl overflow-hidden">
-        @if(\App\Models\Table::query()->count() === 0)
+        @if (\App\Models\Table::query()->count() === 0)
             <div class="flex flex-col items-center justify-center h-full text-sm text-gray-400 bg-white dark:bg-gray-900">
                 <x-filament::icon icon="heroicon-o-face-frown" class="mb-2 opacity-50 w-14 h-14" />
                 There are no tables in the system.. yet..
