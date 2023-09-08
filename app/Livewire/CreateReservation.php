@@ -112,7 +112,7 @@ class CreateReservation extends Component implements HasForms
                             ->prefixIcon(fn (?int $state) => ($state === 0) ? 'heroicon-o-bell-slash' : 'heroicon-o-bell-alert')
                             ->in([0, 15, 30, 60, 120])
                             ->dehydrateStateUsing(fn (int $state, Get $get) => $state !== 0 ? Carbon::parse($get('start_at'))->addMinutes($state)->toDateTimeString() : null
-                        ),
+                            ),
 
                         TextInput::make('guest_count')
                             ->label('Hwo many people will be coming')
@@ -132,10 +132,10 @@ class CreateReservation extends Component implements HasForms
                     ]),
                 Actions::make([
                     Action::make('save')
-                        ->label('Create reservation')
-                        ->size('xl')
-                        ->icon('heroicon-o-check')
-                        ->action(fn () => $this->submit()),
+                            ->label('Create reservation')
+                            ->size('xl')
+                            ->icon('heroicon-o-check')
+                            ->action(fn () => $this->submit()),
                 ]),
             ])->statePath('data');
     }
