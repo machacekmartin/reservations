@@ -30,7 +30,7 @@
                 {{ $table->label }}
             </span>
         </div>
-        @if($this->currentUser)
+        @if ($this->currentUser)
             <span class="flex mt-auto">
                 {{ $this->currentReservation->end_at->diffInMinutes(now()) }} minutes
             </span>
@@ -40,7 +40,7 @@
             <span class="flex flex-col mt-auto">
                 @if ($this->soonestReservation)
                     <span class="text-sm">{{ $this->soonestReservation?->user->name }}</span>
-                    <span class="text-sm">{{ $this->soonestReservation?->start_at->format('H:i (d. m. Y)')}}</span>
+                    <span class="text-sm">{{ $this->soonestReservation?->start_at->format('H:i (d. m. Y)') }}</span>
                 @endif
             </span>
         @endif
