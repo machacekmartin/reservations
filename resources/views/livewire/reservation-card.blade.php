@@ -5,7 +5,7 @@
             {{ $reservation->start_at->format('d. m. Y') }}
         </div>
         <div class="relative ml-auto">
-            @if($reservation->canceled_at === null)
+            @if ($reservation->canceled_at === null)
                 <x-filament::button
                     size="xs"
                     icon="heroicon-o-no-symbol"
@@ -44,7 +44,7 @@
                 Reminder
             </dt>
             <dd class="text-gray-700">
-                @if($reservation->remind_at)
+                @if ($reservation->remind_at)
                     {{ $reservation->remind_at->diffInMinutes($reservation->start_at) }} minutes before start
                 @else
                     -
@@ -56,13 +56,13 @@
                 Guests
             </dt>
             <dd class="text-gray-700">
-                @if($reservation->tables()->count() === 1)
+                @if ($reservation->tables()->count() === 1)
                     1 table
                 @else
                     {{ $reservation->tables()->count() }} tables
                 @endif
 
-                @if($reservation->guest_count === 1)
+                @if ($reservation->guest_count === 1)
                     for 1 person
                 @else
                     for {{ $reservation->guest_count }} people
@@ -74,7 +74,7 @@
                 Note
             </dt>
             <dd class="text-gray-700">
-                {{ $reservation->note ?? '-'}}
+                {{ $reservation->note ?? '-' }}
             </dd>
         </div>
     </dl>

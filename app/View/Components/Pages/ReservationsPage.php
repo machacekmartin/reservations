@@ -2,10 +2,10 @@
 
 namespace App\View\Components\Pages;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use App\Models\User;
 
 class ReservationsPage extends Component
 {
