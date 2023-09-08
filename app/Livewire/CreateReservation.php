@@ -98,8 +98,9 @@ class CreateReservation extends Component implements HasForms
                     ->columns(2)
                     ->schema([
                         Select::make('remind_at')
-                            ->label('Remind me at')
+                            ->label('Remind me')
                             ->default(0)
+                            ->reactive()
                             ->options([
                                 0 => "Don't remind me",
                                 15 => '15 minutes before reservation',
@@ -107,6 +108,7 @@ class CreateReservation extends Component implements HasForms
                                 60 => '1 hour before reservation',
                                 120 => '2 hours before reservation',
                             ])
+                            ->prefixIcon(fn (int $state) => ($state === 0) ? 'heroicon-o-bell-slash' : 'heroicon-o-bell-alert')
                             ->in([0, 15, 30, 60, 120])
                             ->dehydrateStateUsing(fn (int $state, Get $get) => Carbon::parse($get('start_at'))->addMinutes($state)->toDateTimeString()
                             ),
