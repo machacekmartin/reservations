@@ -55,9 +55,9 @@ is created with admin role. Log in with this account into `/admin` and add some 
 ## Interactive table manipulation
 There are 3 ways you can manipulate interactive tables. The styling might not be done and might require some rethinking to complete, but the tech is there 💅
 
-- `First, in the /admin root page` - This is a generic overview of the current state. When a table is reserved for now(), it will be highlighted there with a couple options to choose from upon clicking the table
-- `Second, in the /create-reservation page` - This is a selector of tables. Select a table or two, this will reflect on the available time options (Certain time options wont be available where there already is a reservation for that time)
-- `Last, in the /admin/tables page` - This is a place where you can move the tables, create new ones, edit them, etc etc (with live polling btw)
+- `First, in the /admin root page` - This is a generic overview of the current state. Meant to be used by employees. When a table is currently reserved, it will be highlighted with a couple of options to choose from upon clicking the table
+- `Second, in the /create-reservation page` - This is a selector of tables meant to be used by normal users. Select a table or two, this will reflect on the available time options (certain time options wont be available where there already is a reservation for that time)
+- `Last, in the /admin/tables page` - This is a place where you can move the tables and is meant to be used by admins or people who setup the restaurant layout. Create new ones, edit them, etc etc (with live polling btw)
 
 
 
