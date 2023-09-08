@@ -132,10 +132,10 @@ class CreateReservation extends Component implements HasForms
                     ]),
                 Actions::make([
                     Action::make('save')
-                            ->label('Create reservation')
-                            ->size('xl')
-                            ->icon('heroicon-o-check')
-                            ->action(fn () => $this->submit()),
+                        ->label('Create reservation')
+                        ->size('xl')
+                        ->icon('heroicon-o-check')
+                        ->action(fn () => $this->submit()),
                 ]),
             ])->statePath('data');
     }
@@ -154,7 +154,7 @@ class CreateReservation extends Component implements HasForms
         $reservation->tables()->attach($tables);
 
         Notification::make()->success()->title(
-            'Reservation for ' . $reservation->start_at->format('d. m. Y') . ' at '. $reservation->start_at->format('H:i') . ' created'
+            'Reservation for ' . $reservation->start_at->format('d. m. Y') . ' at ' . $reservation->start_at->format('H:i') . ' created'
         )->send();
 
         redirect()->route('reservations');
