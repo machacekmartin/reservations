@@ -5,7 +5,7 @@
     </x-interactive-canvas>
 
     <div class="mt-6">
-        <h2 class="mb-2 font-semibold">2. When?</h2>
+        <h2 class="mb-2 font-semibold">2. Pick when and some other details</h2>
             {{ $this->form }}
     </div>
 </div>
