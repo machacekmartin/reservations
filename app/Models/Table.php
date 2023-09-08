@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property-read Reservation|null $currentReservation
+ * @property-read Reservation|null $soonestReservation
  * @property-read Dimensions $dimensions
  *
  * @method bool isReservedAt(Carbon $date)
@@ -64,6 +65,17 @@ class Table extends Model
                 ->where('canceled_at', null)
                 ->where('start_at', '<=', now())
                 ->where('end_at', '>=', now())
+                ->first()
+        );
+    }
+
+    protected function soonestReservation(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->reservations()
+                ->whereNull('canceled_at')
+                ->where('start_at', '>=', now())
+                ->orderBy('start_at', 'asc')
                 ->first()
         );
     }

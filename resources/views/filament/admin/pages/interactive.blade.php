@@ -1,5 +1,5 @@
 <x-filament-panels::page>
     <x-interactive-canvas>
-        <livewire:edit-interactive-tables />
+        <livewire:control-interactive-tables />
     </x-interactive-canvas>
 </x-filament-panels::page>

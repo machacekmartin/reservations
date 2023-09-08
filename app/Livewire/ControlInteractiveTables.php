@@ -6,7 +6,7 @@ use App\Filament\Admin\Resources\TableResource;
 use App\Models\Table;
 use Filament\Actions\Action;
 
-class EditInteractiveTables extends InteractiveTables
+class ControlInteractiveTables extends InteractiveTables
 {
     public function onTableClick(Table $table): void
     {
@@ -15,15 +15,12 @@ class EditInteractiveTables extends InteractiveTables
 
     public function onTableDragEnd(Table $table, int $x, int $y): void
     {
-        $table->dimensions->x = $x;
-        $table->dimensions->y = $y;
-
-        $table->save();
+        //
     }
 
     public function getTableDraggable(Table $table): bool
     {
-        return true;
+        return false;
     }
 
     public function getTableClasses(Table $table): array
@@ -33,7 +30,7 @@ class EditInteractiveTables extends InteractiveTables
 
     public function getTableInnerView(Table $table): string
     {
-        return 'table-inner';
+        return 'table-inner-control';
     }
 
     public function getTableInnerViewData(Table $table): array
