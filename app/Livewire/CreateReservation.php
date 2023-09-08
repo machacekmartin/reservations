@@ -140,7 +140,7 @@ class CreateReservation extends Component implements HasForms
             ])->statePath('data');
     }
 
-    private function submit(): void
+    public function submit(): void
     {
         $tables = $this->selectedTables;
 
