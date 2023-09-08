@@ -153,7 +153,10 @@ class CreateReservation extends Component implements HasForms
 
         $reservation->tables()->attach($tables);
 
-        Notification::make()->success()->title('Reservation for ' . $reservation->start_at->format('H:i') . ' created')->send();
+        Notification::make()->success()->title(
+            'Reservation for ' . $reservation->start_at->format('d. m. Y') . ' at '. $reservation->start_at->format('H:i') . ' created'
+        )->send();
+
         redirect()->route('reservations');
     }
 
