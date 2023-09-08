@@ -2,7 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Filament\Admin\Resources\TableResource;
+use App\Filament\Admin\Resources\ReservationResource\Actions\CancelAction;
+use App\Filament\Admin\Resources\ReservationResource\Actions\FulfillAction;
+use App\Filament\Admin\Resources\ReservationResource\Actions\MissAction;
+use App\Models\Reservation;
 use App\Models\Table;
 use Filament\Actions\Action;
 
@@ -10,7 +13,9 @@ class ControlInteractiveTables extends InteractiveTables
 {
     public function onTableClick(Table $table): void
     {
-        $this->mountAction('clickAction', ['record' => $table]);
+        if (! $table->currentReservation) return;
+
+        $this->mountAction('clickAction', ['record' => $table->currentReservation]);
     }
 
     public function onTableDragEnd(Table $table, int $x, int $y): void
@@ -47,10 +52,15 @@ class ControlInteractiveTables extends InteractiveTables
 
         return Action::make('click-action')
             ->record($arguments['record'])
-            ->fillForm(fn ($record) => $record->toArray())
-            ->action(function (Table $record, array $data) {
-                $record->update($data);
-            })
-            ->form(fn ($form) => TableResource::form($form));
+            ->requiresConfirmation()
+            ->modalFooterActions(fn (Reservation $record) => [
+                FulfillAction::make('fulfill')->record($record)->label('Guest arrived'),
+                MissAction::make('miss')->record($record),
+                CancelAction::make('cancel')->record($record)->label('Cancel reservation'),
+            ])
+            ->modalIcon('heroicon-o-pencil-square')
+            ->modalDescription('What would you like to do with this reservation?')
+            ->modalHeading(fn (Reservation $record) => $record->user->name ."'s reservation for ". $record->start_at->format('d. m. Y H:i'))
+            ->modalWidth('2xl');
     }
 }

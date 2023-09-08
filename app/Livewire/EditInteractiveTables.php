@@ -43,7 +43,7 @@ class EditInteractiveTables extends InteractiveTables
         ];
     }
 
-    public function clickAction(): Action
+    public function clickAction(): mixed
     {
         /** @phpstan-ignore-next-line */
         $arguments = $this->mountedActionsArguments[0];
