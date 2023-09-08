@@ -38,6 +38,17 @@ it('redirects from reservations page because user is not logged in', function ()
         ->assertRedirectToRoute('login');
 });
 
+it('visits reservation create page', function () {
+    actingAs(User::factory()->create())
+        ->get(route('create-reservation'))
+        ->assertOk();
+});
+
+it('redirects from reservation create page because user is not logged in', function () {
+    get(route('create-reservation'))
+        ->assertRedirectToRoute('login');
+});
+
 it('visits account edit page', function () {
     actingAs(User::factory()->create())
         ->get(route('edit-account'))
