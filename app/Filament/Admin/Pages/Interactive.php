@@ -3,7 +3,6 @@
 namespace App\Filament\Admin\Pages;
 
 use Filament\Pages\Dashboard as BasePage;
-
 use Illuminate\Contracts\Support\Htmlable;
 
 class Interactive extends BasePage
