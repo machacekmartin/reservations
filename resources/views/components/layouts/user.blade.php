@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen pb-40 bg-gray-100">
         <nav class="px-4 mb-10 bg-gray-900 border-b-2 rounded-b-lg shadow md:border-b-4 border-b-gray-500 md:px-8">
             <div class="relative flex items-center justify-between h-16 max-w-4xl mx-auto md:h-20">
                 <a href="{{ route('reservations') }}" class="relative flex items-center flex-shrink-0">
@@ -23,5 +23,4 @@
             {{ $slot }}
         </div>
     </div>
-
 </x-layouts.app>
