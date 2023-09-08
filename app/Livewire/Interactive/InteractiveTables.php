@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Interactive;
 
 use App\Contracts\HasInteractiveTables;
 use App\Models\Table;

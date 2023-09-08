@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Interactive;
 
 use App\Filament\Admin\Resources\TableResource;
 use App\Models\Table;
 use Filament\Actions\Action;
 
-class EditInteractiveTables extends InteractiveTables
+class EditTables extends InteractiveTables
 {
     public function onTableClick(Table $table): void
     {
@@ -33,7 +33,7 @@ class EditInteractiveTables extends InteractiveTables
 
     public function getTableInnerView(Table $table): string
     {
-        return 'table-inner';
+        return 'interactive.table-inner-edit';
     }
 
     public function getTableInnerViewData(Table $table): array

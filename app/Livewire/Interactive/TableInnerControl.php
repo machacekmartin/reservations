@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Interactive;
 
 use App\Enums\ReservationStatus;
 use App\Models\Reservation;
@@ -25,7 +25,7 @@ class TableInnerControl extends Component
 
     public function render(): View
     {
-        return view('livewire.table-inner-control');
+        return view('livewire.interactive.table-inner-control');
     }
 
     public function getPercentage(): float

@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Interactive;
 
 use App\Models\Table;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class TableInner extends Component
+class TableInnerEdit extends Component
 {
     public Table $table;
 
     public function render(): View
     {
-        return view('livewire.table-inner');
+        return view('livewire.interactive.table-inner-edit');
     }
 }

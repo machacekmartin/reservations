@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Interactive;
 
 use App\Models\Table;
 
-class SelectInteractiveTables extends InteractiveTables
+class SelectTables extends InteractiveTables
 {
     /**
      * @var array<int>
@@ -40,7 +40,7 @@ class SelectInteractiveTables extends InteractiveTables
 
     public function getTableInnerView(Table $table): string
     {
-        return 'table-inner-select';
+        return 'interactive.table-inner-select';
     }
 
     public function getTableInnerViewData(Table $table): array

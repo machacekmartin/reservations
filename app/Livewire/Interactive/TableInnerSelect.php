@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Interactive;
 
 use App\Models\Table;
 use Illuminate\View\View;
@@ -16,6 +16,6 @@ class TableInnerSelect extends Component
 
     public function render(): View
     {
-        return view('livewire.table-inner-select');
+        return view('livewire.interactive.table-inner-select');
     }
 }

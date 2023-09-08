@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Interactive;
 
 use App\Filament\Admin\Resources\ReservationResource\Actions\CancelAction;
 use App\Filament\Admin\Resources\ReservationResource\Actions\FulfillAction;
@@ -9,7 +9,7 @@ use App\Models\Reservation;
 use App\Models\Table;
 use Filament\Actions\Action;
 
-class ControlInteractiveTables extends InteractiveTables
+class ControlTables extends InteractiveTables
 {
     public function onTableClick(Table $table): void
     {
@@ -37,7 +37,7 @@ class ControlInteractiveTables extends InteractiveTables
 
     public function getTableInnerView(Table $table): string
     {
-        return 'table-inner-control';
+        return 'interactive.table-inner-control';
     }
 
     public function getTableInnerViewData(Table $table): array

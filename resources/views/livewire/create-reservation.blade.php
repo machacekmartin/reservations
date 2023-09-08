@@ -1,7 +1,7 @@
 <div>
     <h2 class="mb-2 font-semibold">1. Select from available tables</h2>
     <x-interactive-canvas>
-        <livewire:select-interactive-tables />
+        <livewire:interactive.select-tables />
     </x-interactive-canvas>
 
     <div class="mt-6">

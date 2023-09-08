@@ -45,11 +45,11 @@ class TableResource extends Resource
                     ->schema([
                         TextInput::make('dimensions.width')
                             ->numeric()
-                            ->minValue(20)
+                            ->minValue(120)
                             ->required(),
                         TextInput::make('dimensions.height')
                             ->numeric()
-                            ->minValue(20)
+                            ->minValue(120)
                             ->required(),
                         TextInput::make('dimensions.x')
                             ->numeric()
