@@ -13,7 +13,9 @@ class ControlInteractiveTables extends InteractiveTables
 {
     public function onTableClick(Table $table): void
     {
-        if (! $table->currentReservation) return;
+        if (! $table->currentReservation) {
+            return;
+        }
 
         $this->mountAction('clickAction', ['record' => $table->currentReservation]);
     }
@@ -60,7 +62,7 @@ class ControlInteractiveTables extends InteractiveTables
             ])
             ->modalIcon('heroicon-o-pencil-square')
             ->modalDescription('What would you like to do with this reservation?')
-            ->modalHeading(fn (Reservation $record) => $record->user->name ."'s reservation for ". $record->start_at->format('d. m. Y H:i'))
+            ->modalHeading(fn (Reservation $record) => $record->user->name . "'s reservation for " . $record->start_at->format('d. m. Y H:i'))
             ->modalWidth('2xl');
     }
 }
